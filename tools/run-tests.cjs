@@ -18,7 +18,7 @@ const files = [
   'scripts/core/storage.js', 'scripts/core/progression.js', 'scripts/core/adaptive-engine.js',
   'scripts/core/review-system.js', 'scripts/core/module-registry.js',
   'scripts/modules/logic.js', 'scripts/modules/attention.js', 'scripts/modules/memory.js',
-  'scripts/modules/creativity.js', 'scripts/modules/mathematics.js', 'scripts/modules/critical-thinking.js',
+  'scripts/modules/creativity.js', 'scripts/modules/mathematics.js', 'scripts/modules/advanced-math-bank.js', 'scripts/modules/critical-thinking.js',
   'scripts/modules/bible.js', 'scripts/modules/science.js', 'scripts/modules/language.js',
   'scripts/modules/strategy.js', 'scripts/modules/interdisciplinary.js', 'scripts/modules/metacognition.js',
   'scripts/core/quality-overrides.js', 'scripts/tests/self-tests.js'

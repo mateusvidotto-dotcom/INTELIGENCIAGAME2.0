@@ -113,9 +113,11 @@
   MF.shuffleChoiceOptions = function (source) {
     const q = MF.cloneQuestion(source);
     if (q.type !== 'choice' || !Array.isArray(q.options) || !Number.isInteger(q.answer)) return q;
-    const correctValue = q.options[q.answer];
-    q.options = shuffled(q.options);
-    q.answer = q.options.indexOf(correctValue);
+    const paired = q.options.map((option, index) => ({ option, explanation: Array.isArray(q.optionExplanations) ? q.optionExplanations[index] : undefined, correct: index === q.answer }));
+    const randomized = shuffled(paired);
+    q.options = randomized.map(item => item.option);
+    q.answer = randomized.findIndex(item => item.correct);
+    if (Array.isArray(q.optionExplanations)) q.optionExplanations = randomized.map(item => item.explanation);
     return q;
   };
 
@@ -123,7 +125,7 @@
     if (!q || typeof q.id !== 'string' || !q.id || typeof q.prompt !== 'string' || !q.prompt.trim()) return false;
     if (!Number.isInteger(q.level) || q.level < 1 || q.level > 9) return false;
     if (!['choice', 'number', 'text', 'count', 'memory', 'open'].includes(q.type)) return false;
-    if (q.type === 'choice') return Array.isArray(q.options) && q.options.length >= 4 && q.options.every(o => typeof o === 'string' && o.trim()) && new Set(q.options.map(o => o.trim().toLocaleLowerCase('pt-BR'))).size === q.options.length && Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length;
+    if (q.type === 'choice') return Array.isArray(q.options) && q.options.length >= 4 && q.options.every(o => typeof o === 'string' && o.trim()) && new Set(q.options.map(o => o.trim().toLocaleLowerCase('pt-BR'))).size === q.options.length && Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length && (!q.optionExplanations || (Array.isArray(q.optionExplanations) && q.optionExplanations.length === q.options.length && q.optionExplanations.every(item => typeof item === 'string' && item.trim())));
     if (q.type === 'open') return Array.isArray(q.criteria) && q.criteria.length >= 2;
     if (q.type === 'memory') return Array.isArray(q.sequence) && q.sequence.length > 0 && typeof q.answer === 'string' && q.answer.length > 0;
     if (q.type === 'count' || q.type === 'number') return Number.isFinite(Number(q.answer));

@@ -7,7 +7,7 @@
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const MODULES = MF.modules;
-  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS & OBMEP', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
+  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS DE CONHECIMENTO', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
   const iconFor = moduleId => (MF.getModule(moduleId) || {}).icon || '◈';
   const app = {
     currentView: 'home', session: null, filter: 'all', modalAction: null,
@@ -287,7 +287,8 @@
       else if (q.type==='memory') answerInfo = `<p><strong>Resposta esperada:</strong> ${escapeHTML(Array.from(String(q.answer)).join(' '))}</p>`;
       else answerInfo = `<p><strong>Resposta esperada:</strong> ${escapeHTML(q.answer)}</p>`;
     }
-    return `<div class="feedback-panel ${correct?'':'is-wrong'}"><div class="feedback-title ${correct?'good':'bad'}">${correct?'✓ Resposta correta':'× Ainda não — revise o raciocínio'}</div>${answerInfo}<p>${escapeHTML(q.explanation || 'Revise as condições do enunciado e tente novamente.')}</p>${q.reference?`<div class="feedback-reference">Referência: ${escapeHTML(q.reference)}</div>`:''}<p class="feedback-reference">${correct?`+${fb.xpGain||0} XP registrados.`:'Você pode tentar novamente ou seguir para a próxima questão. O erro também entrou na fila de revisão.'}</p></div>`;
+    const optionDetails = q.type === 'choice' && Array.isArray(q.optionExplanations) ? `<div class="option-explanation-list"><strong>Por que cada alternativa funciona ou falha</strong>${q.options.map((option,index)=>`<div class="option-explanation ${index===q.answer?'is-correct':''}"><b>${String.fromCharCode(65+index)} · ${index===q.answer?'Correta':'Incorreta'}</b><span>${escapeHTML(q.optionExplanations[index])}</span></div>`).join('')}</div>` : '';
+    return `<div class="feedback-panel ${correct?'':'is-wrong'}"><div class="feedback-title ${correct?'good':'bad'}">${correct?'✓ Resposta correta':'× Ainda não — revise o raciocínio'}</div>${answerInfo}<p>${escapeHTML(q.explanation || 'Revise as condições do enunciado e tente novamente.')}</p>${optionDetails}${q.reference?`<div class="feedback-reference">Referência: ${escapeHTML(q.reference)}</div>`:''}<p class="feedback-reference">${correct?`+${fb.xpGain||0} XP registrados.`:'Você pode tentar novamente ou seguir para a próxima questão. O erro também entrou na fila de revisão.'}</p></div>`;
   }
   function renderQuestionActions(q,session) {
     if (session.feedback) {

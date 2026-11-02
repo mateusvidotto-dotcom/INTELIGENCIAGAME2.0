@@ -1,29 +1,37 @@
-# Arquitetura MIND FORGE OMEGA v1.3.0
+# Arquitetura MIND FORGE OMEGA v1.3.1
 
 ## Separação de execução
 
-- **Frontend estático**: HTML, CSS e JavaScript servidos por GitHub Pages ou servidor estático. O modo já existente permanece disponível sem o backend.
-- **Python Core**: FastAPI local em `backend/app`, com SQLite local. O frontend só o utiliza quando o usuário configura e testa uma URL.
-- **Dados curriculares**: JSON versionado em `data/curriculum/tracks.json`, exposto localmente no frontend e disponibilizado pelo endpoint `/api/v1/curriculum`.
-- **Biblioteca OBMEP**: PDFs originais fornecidos pelo usuário em `assets/obmep/pdfs`, acompanhados de catálogo JSON com extração textual indicativa. Quando há figuras, fórmulas ou extração duvidosa, o PDF é a fonte autoritativa.
+- **Frontend estático**: HTML, CSS e JavaScript servidos por GitHub Pages ou servidor estático. Todos os laboratórios existentes permanecem disponíveis sem backend.
+- **Python Core**: FastAPI local em `backend/app`, com SQLite. O frontend usa a API quando o usuário configura e testa uma URL.
+- **Dados curriculares**: JSON versionado em `data/curriculum/tracks.json`, usado no frontend e exposto pelo endpoint `/api/v1/curriculum`.
+- **Banco matemático autoral**: desafios estruturados em `scripts/modules/advanced-math-bank.js`, anexados ao laboratório de matemática já existente.
+
+## Fluxo de exercícios
+
+1. O navegador seleciona uma questão do banco integrado.
+2. O motor de sessão instancia e, quando aplicável, embaralha as alternativas.
+3. Explicações individuais das alternativas são embaralhadas em conjunto com suas alternativas correspondentes.
+4. Depois da tentativa, o feedback exibe a explicação principal e as justificativas específicas, quando disponíveis.
+5. Tentativas, XP e revisões são registrados pelo estado local; o Python Core pode receber a tentativa quando a API está configurada.
 
 ## Fluxo Python
 
-1. O frontend faz uma requisição ao Python Core.
-2. FastAPI valida payloads com Pydantic.
-3. Geradores determinísticos criam exercícios somente para as competências registradas em `SUPPORTED`.
-4. O endpoint de geração remove resposta e solução antes de enviar o exercício ao navegador.
-5. A tentativa é validada no servidor e registrada no SQLite.
+1. O frontend envia requisições ao Python Core.
+2. FastAPI valida os payloads com Pydantic.
+3. Geradores determinísticos criam exercícios somente para as competências implementadas.
+4. O endpoint de geração oculta resposta e solução antes de enviar o exercício ao navegador.
+5. A tentativa é validada e registrada em SQLite.
 6. Motores heurísticos calculam evidências, revisões e recomendações.
 
 ## Limites conhecidos
 
-- O motor não utiliza IA generativa: não existe provedor configurado e `/api/v1/ai/status` informa isso explicitamente.
+- Não existe provedor de IA conectado.
 - O banco local não sincroniza entre dispositivos.
-- A API local não tem autenticação multiusuário; não a publique diretamente na internet.
-- A estimativa de domínio é heurística para orientar treino, não diagnóstico, QI ou medida psicométrica.
-- O mapa curricular descreve tópicos e pré-requisitos; não representa cursos completos já escritos.
+- A API não tem autenticação multiusuário; não deve ser publicada diretamente na internet.
+- A estimativa de domínio é heurística, não diagnóstico, QI ou medida psicométrica.
+- O mapa curricular descreve tópicos e pré-requisitos, não cursos completos já redigidos.
 
 ## Implantação futura
 
-GitHub Pages não executa backend Python. Em produção, mantenha frontend e backend separados, com origem CORS explícita, autenticação, autorização, rate limiting, gestão de segredos, backups, política de privacidade e revisão de segurança. Não habilite CORS aberto com `*` para endpoints que guardem dados pessoais.
+GitHub Pages executa apenas o frontend estático. Em produção, mantenha frontend e backend separados, com origem CORS explícita, autenticação, autorização, limites de requisição, gestão de segredos, backups, política de privacidade e revisão de segurança.

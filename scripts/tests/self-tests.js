@@ -38,6 +38,13 @@
             if (new Set(q.options.map(x => String(x).trim().toLocaleLowerCase('pt-BR'))).size !== q.options.length) failures.push(`Alternativas duplicadas em ${q.id}`);
             const shuffled = MF.shuffleChoiceOptions(q);
             if (shuffled.options[shuffled.answer] !== q.options[q.answer]) failures.push(`Embaralhamento quebrou o gabarito de ${q.id}`);
+            if (Array.isArray(q.optionExplanations)) {
+              if (!Array.isArray(shuffled.optionExplanations) || shuffled.optionExplanations.length !== shuffled.options.length) failures.push(`Embaralhamento perdeu justificativas de alternativas em ${q.id}`);
+              else for (let i = 0; i < shuffled.options.length; i++) {
+                const originalIndex = q.options.indexOf(shuffled.options[i]);
+                if (shuffled.optionExplanations[i] !== q.optionExplanations[originalIndex]) failures.push(`Justificativa ficou associada à alternativa errada em ${q.id}`);
+              }
+            }
           }
           if (q.type === 'count' && String(q.displaySequence || '').split(/\s+/).filter(symbol => symbol === q.target).length !== q.answer && !q.dynamic) failures.push(`Contagem-base não confere: ${q.id}`);
           if (q.type === 'memory' && answerForMemory(q) !== q.answer) failures.push(`Resposta-base de memória não confere: ${q.id}`);

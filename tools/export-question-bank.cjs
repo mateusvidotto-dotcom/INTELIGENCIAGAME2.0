@@ -32,6 +32,7 @@ const files = [
   'scripts/modules/memory.js',
   'scripts/modules/creativity.js',
   'scripts/modules/mathematics.js',
+  'scripts/modules/advanced-math-bank.js',
   'scripts/modules/critical-thinking.js',
   'scripts/modules/bible.js',
   'scripts/modules/science.js',
