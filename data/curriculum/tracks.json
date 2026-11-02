@@ -1,0 +1,1511 @@
+{
+  "version": "1.0.0",
+  "description": "Mapa curricular inicial com 22 trilhas, temas e pré-requisitos declarados. Não representa 22 cursos completos; as unidades precisam ser desenvolvidas e revisadas progressivamente.",
+  "tracks": [
+    {
+      "id": "math",
+      "title": "Matemática avançada",
+      "area": "STEM",
+      "description": "Do raciocínio aritmético à demonstração matemática, com foco em resolução de problemas e transferência.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "math-01",
+          "title": "Aritmética, frações e proporções",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-02",
+          "title": "Divisibilidade, MDC e MMC",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-03",
+          "title": "Álgebra e equações",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-04",
+          "title": "Funções e sistemas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-05",
+          "title": "Geometria plana e espacial",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-06",
+          "title": "Contagem e combinatória",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-07",
+          "title": "Probabilidade e estatística",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-08",
+          "title": "Teoria dos números, paridade e invariantes",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-09",
+          "title": "Matrizes, determinantes e álgebra linear introdutória",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-10",
+          "title": "Lógica matemática, grafos e matemática discreta",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "math-11",
+          "title": "Cálculo introdutório (trilha futura)",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "logic",
+      "title": "Lógica e raciocínio",
+      "area": "Raciocínio",
+      "description": "Dedução, indução, modelagem de restrições, argumentação e pensamento algorítmico.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "logic-01",
+          "title": "Proposições e conectivos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-02",
+          "title": "Tabelas-verdade e equivalências",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-03",
+          "title": "Quantificadores e predicados",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-04",
+          "title": "Dedução e contraexemplos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-05",
+          "title": "Indução e abdução",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-06",
+          "title": "Sequências e padrões",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-07",
+          "title": "Problemas de restrições",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-08",
+          "title": "Grafos e árvores de decisão",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-09",
+          "title": "Falácias e validade de argumentos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "logic-10",
+          "title": "Demonstrações",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "Memória e aprendizagem",
+      "area": "Cognição",
+      "description": "Prática de recuperação, elaboração, associação e revisão distribuída aplicadas a conteúdos reais.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "memory-01",
+          "title": "Memória de trabalho",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-02",
+          "title": "Memória episódica e semântica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-03",
+          "title": "Memória verbal, visual e espacial",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-04",
+          "title": "Recuperação ativa",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-05",
+          "title": "Repetição espaçada",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-06",
+          "title": "Elaboração e autoexplicação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-07",
+          "title": "Mapas conceituais",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-08",
+          "title": "Revisão cumulativa",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "memory-09",
+          "title": "Transferência e retenção",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "Atenção e concentração",
+      "area": "Cognição",
+      "description": "Prática de observação, atenção seletiva e sustentada, monitoramento e organização ambiental.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "attention-01",
+          "title": "Atenção seletiva",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-02",
+          "title": "Atenção sustentada",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-03",
+          "title": "Atenção alternada",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-04",
+          "title": "Busca visual e detecção de mudanças",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-05",
+          "title": "Monitoramento de erros",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-06",
+          "title": "Controle de distrações",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-07",
+          "title": "Ambiente e rotina de estudo",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "attention-08",
+          "title": "Pausas e planejamento",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "metacognition",
+      "title": "Metacognição",
+      "area": "Cognição",
+      "description": "Planejar, monitorar e avaliar o próprio processo de aprendizagem com confiança calibrada.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "metacognition-01",
+          "title": "Planejamento da aprendizagem",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-02",
+          "title": "Monitoramento da compreensão",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-03",
+          "title": "Confiança e calibração",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-04",
+          "title": "Diário intelectual",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-05",
+          "title": "Análise de erros",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-06",
+          "title": "Autoexplicação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-07",
+          "title": "Estratégias alternativas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "metacognition-08",
+          "title": "Reflexão pós-tarefa",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "chess",
+      "title": "Xadrez",
+      "area": "Jogos estratégicos",
+      "description": "Treinamento de regras, cálculo, padrões, estratégia e análise pós-partida.",
+      "prerequisites": [
+        "logic"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "chess-01",
+          "title": "Regras e movimentos legais",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-02",
+          "title": "Táticas fundamentais",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-03",
+          "title": "Cálculo de variantes",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-04",
+          "title": "Finais básicos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-05",
+          "title": "Princípios de abertura",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-06",
+          "title": "Meio-jogo e planos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-07",
+          "title": "Estratégia posicional",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-08",
+          "title": "Análise de partidas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chess-09",
+          "title": "Revisão de erros com motor",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "puzzles",
+      "title": "Sudoku e quebra-cabeças",
+      "area": "Jogos estratégicos",
+      "description": "Problemas de restrições, busca sistemática, raciocínio espacial e validação.",
+      "prerequisites": [
+        "logic"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "puzzles-01",
+          "title": "Sudoku clássico",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-02",
+          "title": "Candidatos e eliminação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-03",
+          "title": "Estratégias intermediárias",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-04",
+          "title": "Estratégias avançadas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-05",
+          "title": "Kakuro e Nonograms",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-06",
+          "title": "Torres de Hanói",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-07",
+          "title": "Problemas de travessia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "puzzles-08",
+          "title": "Quebra-cabeças espaciais",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "title": "Inglês (CEFR A1–C2)",
+      "area": "Idiomas",
+      "description": "Desenvolvimento separado de leitura, escrita, escuta, fala, vocabulário e gramática.",
+      "prerequisites": [],
+      "priority": "média",
+      "units": [
+        {
+          "id": "english-01",
+          "title": "A1 — iniciante",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-02",
+          "title": "A2 — básico",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-03",
+          "title": "B1 — intermediário",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-04",
+          "title": "B2 — independente",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-05",
+          "title": "C1 — avançado",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-06",
+          "title": "C2 — proficiência",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-07",
+          "title": "Leitura e interpretação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-08",
+          "title": "Escrita e revisão",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-09",
+          "title": "Escuta e conversação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "english-10",
+          "title": "Pronúncia e vocabulário",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "spanish",
+      "title": "Espanhol",
+      "area": "Idiomas",
+      "description": "Competências receptivas e produtivas, com atenção a falsos cognatos e variação linguística.",
+      "prerequisites": [],
+      "priority": "média",
+      "units": [
+        {
+          "id": "spanish-01",
+          "title": "Pronúncia e sons",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-02",
+          "title": "Vocabulário essencial",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-03",
+          "title": "Gramática progressiva",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-04",
+          "title": "Leitura e interpretação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-05",
+          "title": "Escrita",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-06",
+          "title": "Escuta",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-07",
+          "title": "Conversação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-08",
+          "title": "Falsos cognatos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "spanish-09",
+          "title": "Variações regionais",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "portuguese",
+      "title": "Português e comunicação",
+      "area": "Idiomas",
+      "description": "Leitura crítica, gramática funcional, redação, argumentação e comunicação oral.",
+      "prerequisites": [],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "portuguese-01",
+          "title": "Ortografia e pontuação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-02",
+          "title": "Morfossintaxe",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-03",
+          "title": "Semântica e pragmática",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-04",
+          "title": "Interpretação textual",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-05",
+          "title": "Coesão e coerência",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-06",
+          "title": "Redação e escrita acadêmica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-07",
+          "title": "Argumentação e retórica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "portuguese-08",
+          "title": "Oratória e comunicação oral",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "Física",
+      "area": "Ciências",
+      "description": "Modelagem de fenômenos físicos, resolução matemática e interpretação de experimentos.",
+      "prerequisites": [
+        "math"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "physics-01",
+          "title": "Grandezas e unidades",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-02",
+          "title": "Cinemática",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-03",
+          "title": "Dinâmica e leis de Newton",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-04",
+          "title": "Trabalho e energia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-05",
+          "title": "Quantidade de movimento",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-06",
+          "title": "Termologia e termodinâmica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-07",
+          "title": "Ondulatória e óptica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-08",
+          "title": "Eletricidade e magnetismo",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "physics-09",
+          "title": "Física moderna introdutória",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "chemistry",
+      "title": "Química",
+      "area": "Ciências",
+      "description": "Compreensão de estrutura, transformações, quantificação e fenômenos químicos.",
+      "prerequisites": [
+        "math"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "chemistry-01",
+          "title": "Estrutura atômica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-02",
+          "title": "Tabela periódica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-03",
+          "title": "Ligações químicas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-04",
+          "title": "Reações e estequiometria",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-05",
+          "title": "Soluções",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-06",
+          "title": "Termoquímica e cinética",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-07",
+          "title": "Equilíbrio químico",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-08",
+          "title": "Ácidos e bases",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-09",
+          "title": "Eletroquímica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "chemistry-10",
+          "title": "Química orgânica e ambiental",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "biology",
+      "title": "Biologia",
+      "area": "Ciências",
+      "description": "Sistemas vivos, mecanismos biológicos, evidência e pensamento científico.",
+      "prerequisites": [],
+      "priority": "média",
+      "units": [
+        {
+          "id": "biology-01",
+          "title": "Citologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-02",
+          "title": "Genética",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-03",
+          "title": "Evolução",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-04",
+          "title": "Ecologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-05",
+          "title": "Fisiologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-06",
+          "title": "Botânica e zoologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-07",
+          "title": "Microbiologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-08",
+          "title": "Biologia molecular",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-09",
+          "title": "Biotecnologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "biology-10",
+          "title": "Saúde pública e prevenção",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "astronomy",
+      "title": "Astronomia e ciências",
+      "area": "Ciências",
+      "description": "Conhecimento científico interdisciplinar e leitura crítica de evidências.",
+      "prerequisites": [
+        "math"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "astronomy-01",
+          "title": "Sistema Solar",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-02",
+          "title": "Estrelas e evolução estelar",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-03",
+          "title": "Galáxias",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-04",
+          "title": "Cosmologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-05",
+          "title": "Exploração espacial",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-06",
+          "title": "Geologia e clima",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-07",
+          "title": "Método científico",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-08",
+          "title": "Estatística experimental",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "astronomy-09",
+          "title": "Leitura de pesquisas",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "philosophy",
+      "title": "Filosofia",
+      "area": "Humanidades",
+      "description": "História das ideias, análise conceitual, epistemologia, ética e argumentação.",
+      "prerequisites": [
+        "logic"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "philosophy-01",
+          "title": "Filosofia antiga",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-02",
+          "title": "Filosofia medieval",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-03",
+          "title": "Filosofia moderna",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-04",
+          "title": "Filosofia contemporânea",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-05",
+          "title": "Ética",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-06",
+          "title": "Epistemologia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-07",
+          "title": "Metafísica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-08",
+          "title": "Filosofia da ciência",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-09",
+          "title": "Filosofia da mente",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "philosophy-10",
+          "title": "Filosofia política",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "História e cultura geral",
+      "area": "Humanidades",
+      "description": "Trabalho com fontes, cronologia, contexto, causalidade e interpretação histórica.",
+      "prerequisites": [],
+      "priority": "média",
+      "units": [
+        {
+          "id": "history-01",
+          "title": "História antiga",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-02",
+          "title": "História medieval",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-03",
+          "title": "História moderna",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-04",
+          "title": "História contemporânea",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-05",
+          "title": "História do Brasil",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-06",
+          "title": "História das Américas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-07",
+          "title": "História da ciência",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-08",
+          "title": "História das religiões",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-09",
+          "title": "Geografia e geopolítica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "history-10",
+          "title": "Fontes e historiografia",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "bible",
+      "title": "Estudos bíblicos e teologia",
+      "area": "Estudos bíblicos",
+      "description": "Leitura contextual, hermenêutica, história, teologia e apologética com distinção entre texto, inferência e confissão.",
+      "prerequisites": [
+        "portuguese",
+        "history"
+      ],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "bible-01",
+          "title": "Panorama do Antigo Testamento",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-02",
+          "title": "Panorama do Novo Testamento",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-03",
+          "title": "Gêneros literários",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-04",
+          "title": "Contexto histórico e cultural",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-05",
+          "title": "Hermenêutica e exegese",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-06",
+          "title": "Teologia bíblica",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-07",
+          "title": "Teologia sistemática",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-08",
+          "title": "Hebraico, grego koiné e aramaico introdutórios",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-09",
+          "title": "História do cânon e crítica textual",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-10",
+          "title": "História do cristianismo",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-11",
+          "title": "Apologética e filosofia da religião",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "bible-12",
+          "title": "Homilética, evangelismo e ética cristã",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "programming",
+      "title": "Tecnologia e programação",
+      "area": "Tecnologia",
+      "description": "Pensamento computacional, desenvolvimento, automação, testes e engenharia de software.",
+      "prerequisites": [
+        "logic"
+      ],
+      "priority": "alta",
+      "units": [
+        {
+          "id": "programming-01",
+          "title": "Lógica computacional",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-02",
+          "title": "Algoritmos e estruturas de dados",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-03",
+          "title": "HTML e CSS",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-04",
+          "title": "JavaScript",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-05",
+          "title": "Python",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-06",
+          "title": "Orientação a objetos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-07",
+          "title": "APIs e HTTP",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-08",
+          "title": "Bancos de dados",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-09",
+          "title": "Git e GitHub",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-10",
+          "title": "Testes e segurança",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-11",
+          "title": "Desenvolvimento web",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "programming-12",
+          "title": "Automação e análise de dados",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "Inteligência artificial",
+      "area": "Tecnologia",
+      "description": "Fundamentos, avaliação, limitações e aplicações responsáveis de sistemas de IA.",
+      "prerequisites": [
+        "programming"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "ai-01",
+          "title": "Fundamentos de IA",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-02",
+          "title": "Aprendizado de máquina",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-03",
+          "title": "Redes neurais",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-04",
+          "title": "Modelos de linguagem",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-05",
+          "title": "IA generativa",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-06",
+          "title": "Engenharia de prompts",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-07",
+          "title": "Avaliação e alucinações",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-08",
+          "title": "Ética e privacidade",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-09",
+          "title": "Sistemas de recomendação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "ai-10",
+          "title": "Automação e projetos",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Economia, finanças e estratégia",
+      "area": "Aplicações",
+      "description": "Educação financeira, pensamento econômico, risco e decisões fundamentadas.",
+      "prerequisites": [
+        "math"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "economics-01",
+          "title": "Orçamento e juros",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-02",
+          "title": "Inflação e poder de compra",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-03",
+          "title": "Consumo e poupança",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-04",
+          "title": "Risco e retorno",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-05",
+          "title": "Economia brasileira",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-06",
+          "title": "Microeconomia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-07",
+          "title": "Macroeconomia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-08",
+          "title": "Empreendedorismo",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-09",
+          "title": "Análise de oportunidades",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "economics-10",
+          "title": "Tomada de decisão",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "communication",
+      "title": "Comunicação, liderança e inteligência social",
+      "area": "Aplicações",
+      "description": "Comunicação ética, colaboração, negociação, apresentação e solução de conflitos.",
+      "prerequisites": [
+        "portuguese"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "communication-01",
+          "title": "Escuta ativa",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-02",
+          "title": "Comunicação assertiva",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-03",
+          "title": "Argumentação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-04",
+          "title": "Negociação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-05",
+          "title": "Liderança e trabalho em equipe",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-06",
+          "title": "Resolução de conflitos",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-07",
+          "title": "Empatia",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-08",
+          "title": "Apresentações e oratória",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "communication-09",
+          "title": "Feedback construtivo",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    },
+    {
+      "id": "creativity",
+      "title": "Criatividade e inovação",
+      "area": "Aplicações",
+      "description": "Exploração de alternativas, reformulação de problemas, prototipagem e experimentação.",
+      "prerequisites": [
+        "logic"
+      ],
+      "priority": "média",
+      "units": [
+        {
+          "id": "creativity-01",
+          "title": "Pensamento divergente",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-02",
+          "title": "Pensamento convergente",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-03",
+          "title": "Associação de ideias",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-04",
+          "title": "Analogias",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-05",
+          "title": "Design thinking",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-06",
+          "title": "Resolução criativa de problemas",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-07",
+          "title": "Prototipagem",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-08",
+          "title": "Pesquisa e experimentação",
+          "status": "mapa_curricular",
+          "content_available": false
+        },
+        {
+          "id": "creativity-09",
+          "title": "Projetos interdisciplinares",
+          "status": "mapa_curricular",
+          "content_available": false
+        }
+      ]
+    }
+  ]
+}
