@@ -36,7 +36,7 @@
     if (view === 'modules') renderModuleGrid('all-module-grid');
     if (view === 'campaign') renderCampaign();
     if (view === 'review') renderReviewPage();
-    if (view === 'progress') { renderProgress(); MF.StudyCenter?.renderProgress(); }
+    if (view === 'progress') renderProgress();
     if (view === 'settings') renderSettings();
     if (view === 'learning') { MF.LearningUI?.renderTracks(); MF.StudyCenter?.render(); }
     if (view === 'python') MF.PythonLab?.render();
@@ -511,7 +511,7 @@
     $('#export-progress').addEventListener('click',exportProgress);
     $('#import-progress-file').addEventListener('change',event=>importProgress(event.target.files&&event.target.files[0]));
     ['setting-no-timer','setting-confidence','setting-reduced-motion','setting-difficulty','setting-session-length'].forEach(id=>$('#'+id).addEventListener('change',saveSettings));
-    $('#reset-progress').addEventListener('click',()=>openModal('Apagar todo o progresso?', 'XP, estatísticas, histórico, fila de revisão, campanha e preferências serão redefinidos neste navegador.', ()=>{MF.reset();MF.StudyCenter?.resetProgress();app.session=null;renderDashboard();renderProgress();MF.StudyCenter?.renderProgress();renderReviewPage();renderCampaign();renderSettings();toast('Progresso redefinido.');}));
+    $('#reset-progress').addEventListener('click',()=>openModal('Apagar todo o progresso?', 'XP, estatísticas, histórico, fila de revisão, campanha e preferências serão redefinidos neste navegador.', ()=>{MF.reset();MF.StudyCenter?.resetProgress();app.session=null;renderDashboard();renderProgress();renderReviewPage();renderCampaign();renderSettings();toast('Progresso redefinido.');}));
     $('#question-card').addEventListener('input',event=>{
       if (!app.session) return;
       if (event.target.classList.contains('answer-input')) { app.session.answerDraft=event.target.value; persistSession(); }
