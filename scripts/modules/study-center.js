@@ -342,7 +342,7 @@
       '<div><strong>02 · Resolver</strong><p>Exercícios com feedback, pistas graduais e justificativas.</p></div>' +
       '<div><strong>03 · Consolidar</strong><p>Conclusão de aulas registrada localmente para orientar sua continuidade.</p></div>' +
       '</div></div>';
-    updateDashboard();
+    api.updateDashboard();
   }
 
   function renderPath(id) {
@@ -365,7 +365,7 @@
           '<span class="study-lesson-number">' + String(index + 1).padStart(2, '0') + '</span><span class="study-lesson-copy"><strong>' + escapeHTML(lesson.title) + '</strong><small>' + escapeHTML(lesson.unit) + ' · ' + escapeHTML(lesson.objective) + '</small></span>' +
           '<span class="study-lesson-status">' + (isDone ? 'Concluída ✓' : 'Estudar →') + '</span></button>';
       }).join('') + '</div>';
-    updateDashboard();
+    api.updateDashboard();
   }
 
   function renderLesson(lessonId) {
@@ -504,8 +504,8 @@
         if (known.has(id) && payload.completed[id] === true) completed[id] = true;
       });
       saveProgress({ version: 1, completed: completed });
-      updateDashboard();
-      renderProgress();
+      api.updateDashboard();
+      api.renderProgress();
       return true;
     },
     updateDashboard: function () {
@@ -534,8 +534,8 @@
       state.pathId = null;
       state.lessonId = null;
       renderOverview();
-      updateDashboard();
-      renderProgress();
+      api.updateDashboard();
+      api.renderProgress();
     }
   };
 
