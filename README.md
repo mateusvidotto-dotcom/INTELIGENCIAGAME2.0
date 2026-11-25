@@ -5,8 +5,8 @@ Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva os labora
 ## O que há nesta versão
 
 - **English Forge:** cinco aulas iniciais A1 com estrutura de frases, verbo to be, Present Simple, artigos e leitura. Inclui vocabulário contextual e leitura em voz alta quando o navegador oferece síntese de fala.
-- **Vestibular Forge:** cinco aulas autorais de fundamentos em matemática, física, química e interpretação. O conteúdo é um núcleo inicial e precisa ser associado ao programa oficial da edição escolhida.
-- **Olympiad Forge:** cinco aulas sobre paridade, princípio da casa dos pombos, divisibilidade, contagem e demonstração discursiva. As atividades são autorais e não são identificadas como provas oficiais.
+- **Vestibular Forge:** cinco aulas autorais de fundamentos em matemática, física, química e interpretação. Inclui links para o portal oficial do PAS/UEM e para a apresentação do processo seriado. O conteúdo é um núcleo inicial e precisa ser associado ao programa oficial da edição escolhida.
+- **Olympiad Forge:** cinco aulas sobre paridade, princípio da casa dos pombos, divisibilidade, contagem e demonstração discursiva. Inclui links oficiais para provas, soluções e banco de questões. As atividades internas são autorais e não são identificadas como provas oficiais.
 - **Progresso das trilhas:** conclusão de aulas salva localmente no navegador.
 - **Mapa curricular:** as 22 trilhas originais continuam disponíveis em uma seção secundária.
 - **Laboratórios cognitivos:** os módulos de lógica, atenção, memória, criatividade, matemática, ciências, pensamento crítico, Bíblia, estratégia e metacognição continuam preservados.
