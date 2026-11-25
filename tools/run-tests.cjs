@@ -21,7 +21,7 @@ const files = [
   'scripts/modules/creativity.js', 'scripts/modules/mathematics.js', 'scripts/modules/advanced-math-bank.js', 'scripts/modules/critical-thinking.js',
   'scripts/modules/bible.js', 'scripts/modules/science.js', 'scripts/modules/language.js',
   'scripts/modules/strategy.js', 'scripts/modules/interdisciplinary.js', 'scripts/modules/metacognition.js',
-  'scripts/core/quality-overrides.js', 'scripts/tests/self-tests.js'
+  'scripts/core/quality-overrides.js', 'scripts/modules/study-center.js', 'scripts/data/study-programs.js', 'scripts/modules/study-expansion.js', 'scripts/tests/self-tests.js'
 ];
 for (const file of files) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'), context, { filename:file, timeout: 5000 });
 const MF = context.MindForge;
@@ -44,3 +44,82 @@ const firstFive = picked.slice(0,5).map(item => item.taskFamily);
 if (new Set(firstFive).size < 3) { console.error('Seleção adaptativa não diversificou famílias de tarefa o suficiente.'); process.exitCode = 1; }
 if (process.exitCode) process.exit();
 console.log('PASSOU: pontuação, persistência, revisão e diversidade adaptativa.');
+
+const studyPaths = MF.StudyCenter && MF.StudyCenter.paths;
+if (!Array.isArray(studyPaths) || studyPaths.length !== 3) {
+  console.error('O centro de estudos deve registrar três trilhas prioritárias.'); process.exitCode = 1;
+} else {
+  const lessonIds = new Set();
+  let lessonCount = 0;
+  for (const path of studyPaths) {
+    if (!Array.isArray(path.lessons) || path.lessons.length < 4) {
+      console.error('Trilha sem unidades iniciais suficientes: ' + path.id); process.exitCode = 1;
+    }
+    for (const lesson of path.lessons || []) {
+      lessonCount++;
+      if (!lesson.id || lessonIds.has(lesson.id)) {
+        console.error('Identificador de aula ausente ou duplicado: ' + lesson.id); process.exitCode = 1;
+      }
+      lessonIds.add(lesson.id);
+      const question = lesson.question;
+      if (!question || !['choice','open'].includes(question.type)) {
+        console.error('Atividade inválida em ' + lesson.id); process.exitCode = 1;
+      } else if (question.type === 'choice' && (!Array.isArray(question.options) || !Number.isInteger(question.answer) || question.answer < 0 || question.answer >= question.options.length)) {
+        console.error('Gabarito inválido em ' + lesson.id); process.exitCode = 1;
+      } else if (question.type === 'open' && (!Array.isArray(question.rubric) || question.rubric.length < 2 || !question.modelAnswer)) {
+        console.error('Rubrica ou modelo de resposta ausente em ' + lesson.id); process.exitCode = 1;
+      }
+    }
+  }
+  const pigeonholeLesson = studyPaths.find(path => path.id === 'olympiad')?.lessons.find(lesson => lesson.id === 'olymp-pigeon-01');
+  if (!pigeonholeLesson || !pigeonholeLesson.question.prompt.includes('32 estudantes') || pigeonholeLesson.question.answer !== 0) {
+    console.error('O exemplo do princípio da casa dos pombos precisa manter a quantidade correta de objetos e categorias.'); process.exitCode = 1;
+  }
+  if (!studyPaths.some(path => path.id === 'english') || !studyPaths.some(path => path.id === 'vestibular') || !studyPaths.some(path => path.id === 'olympiad')) {
+    console.error('As trilhas de inglês, vestibular e olimpíadas devem estar presentes.'); process.exitCode = 1;
+  }
+  if (!process.exitCode) console.log('PASSOU: centro de estudos com ' + studyPaths.length + ' trilhas e ' + lessonCount + ' aulas iniciais validadas.');
+  const originalStudyProgress = MF.StudyCenter.exportProgress();
+  const importedStudyProgress = MF.StudyCenter.importProgress({version:1,completed:{'en-a1-01':true,'unknown-lesson':true}});
+  const englishStudyProgress = MF.StudyCenter.progress().english;
+  if (!importedStudyProgress || englishStudyProgress.completed !== 1 || englishStudyProgress.percent !== 4) {
+    console.error('Importação ou cálculo de progresso das trilhas falhou.'); process.exitCode = 1;
+  }
+  MF.StudyCenter.importProgress(originalStudyProgress);
+  if (!process.exitCode) console.log('PASSOU: exportação, importação e progresso local das trilhas.');
+
+}
+
+
+// Validate the expanded CEFR, PAS/UEM and OBMEP learning systems.
+const expanded = MF.StudyExpansion;
+if (!expanded) { console.error('Módulo de expansão não foi carregado.'); process.exitCode = 1; }
+else {
+  const counts = expanded.counts();
+  const expectedLevels = ['A1','A2','B1','B2','C1','C2'];
+  if (JSON.stringify(counts.englishLevels) !== JSON.stringify(expectedLevels) || counts.englishLessons < 25) {
+    console.error('A trilha de inglês não cobre os seis níveis CEFR.'); process.exitCode = 1;
+  }
+  const englishLessons = studyPaths.find(path => path.id === 'english').lessons;
+  if (englishLessons.filter(lesson => lesson.listening).length !== 6 || englishLessons.filter(lesson => lesson.speaking).length !== 6) {
+    console.error('Cada nível CEFR precisa de uma prática de listening e speaking.'); process.exitCode = 1;
+  }
+  if (counts.obmepFirstPhase !== 20 || counts.obmepSecondPhase !== 6) {
+    console.error('Banco OBMEP deve conter 20 itens objetivos e 6 discursivos.'); process.exitCode = 1;
+  }
+  const objective = studyPaths.find(path => path.id === 'olympiad').lessons.filter(lesson => lesson.phase === 'first-phase');
+  if (objective.some(lesson => lesson.question.options.length !== 5)) {
+    console.error('Todos os itens autorais da 1ª fase devem apresentar cinco alternativas.'); process.exitCode = 1;
+  }
+  const pas = expanded.pasItems[0];
+  const perfect = expanded.scorePasItem(pas, [1,4,16]);
+  const partial = expanded.scorePasItem(pas, [1]);
+  const wrong = expanded.scorePasItem(pas, [1,2]);
+  if (perfect.points !== 6 || partial.points !== 2 || wrong.points !== 0) {
+    console.error('Pontuação demonstrativa do formato PAS/UEM incorreta.'); process.exitCode = 1;
+  }
+  if (counts.pasTopics < 50) {
+    console.error('Programa de referência PAS/UEM não foi carregado integralmente.'); process.exitCode = 1;
+  }
+  if (!process.exitCode) console.log('PASSOU: CEFR A1–C2, seis atividades de escuta e fala, PAS/UEM e banco OBMEP 20+6.');
+}

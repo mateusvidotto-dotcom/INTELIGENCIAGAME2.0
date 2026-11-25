@@ -7,7 +7,7 @@
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const MODULES = MF.modules;
-  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS DE CONHECIMENTO', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
+  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS DE ESTUDO', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
   const iconFor = moduleId => (MF.getModule(moduleId) || {}).icon || '◈';
   const app = {
     currentView: 'home', session: null, filter: 'all', modalAction: null,
@@ -38,7 +38,7 @@
     if (view === 'review') renderReviewPage();
     if (view === 'progress') renderProgress();
     if (view === 'settings') renderSettings();
-    if (view === 'learning') MF.LearningUI?.renderTracks();
+    if (view === 'learning') { MF.LearningUI?.renderTracks(); MF.StudyCenter?.render(); }
     if (view === 'python') MF.PythonLab?.render();
   }
   function getAccuracy(stats) { return stats && stats.answered ? Math.round(stats.correct / stats.answered * 100) : null; }
@@ -104,6 +104,7 @@
     const sidebarFocus = $('#sidebar-focus');
     if (stats.answered) sidebarFocus.innerHTML = `<span class="focus-dot"></span><div><strong>${escapeHTML(level.name)} · ${state.xp} XP</strong><small>${stats.answered} tentativa(s) registrada(s)</small></div>`;
     else sidebarFocus.innerHTML = '<span class="focus-dot"></span><div><strong>Pronto para começar</strong><small>Uma questão por vez.</small></div>';
+    MF.StudyCenter?.updateDashboard();
   }
   function renderCampaign() {
     const stages = [
@@ -166,6 +167,7 @@
       const verdict = item.correct === null ? 'Reflexão concluída' : item.correct ? 'Resposta correta' : 'Resposta incorreta';
       return `<div class="history-row"><span class="history-mark ${cls}">${symbol}</span><div><strong>${escapeHTML(item.title || 'Atividade')}</strong><small>${escapeHTML(module ? module.title : item.moduleId)} · ${escapeHTML(verdict)} · ${escapeHTML(date)}</small></div><span class="history-score">${item.difficulty ? 'Nível '+item.difficulty : ''}</span></div>`;
     }).join('')}</div>` : '<div class="empty-state">Ainda não há atividades registradas. O histórico aparecerá aqui depois das primeiras tentativas.</div>';
+    MF.StudyCenter?.renderProgress();
   }
   function renderSettings() {
     const s = MF.state.settings;
@@ -427,7 +429,7 @@
   }
   function exportProgress() {
     try {
-      const contents = MF.Storage.export(MF.state);
+      const contents = MF.Storage.export(MF.state, MF.StudyCenter?.exportProgress());
       const blob = new Blob([contents],{type:'application/json;charset=utf-8'});
       const url = URL.createObjectURL(blob); const a = document.createElement('a');
       a.href=url; a.download='mind-forge-omega-progresso.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
@@ -442,6 +444,7 @@
       if (!validation.ok) { toast(validation.reason,true); return; }
       openModal('Importar backup?', 'O progresso atual será substituído pelos dados do arquivo selecionado. Esta ação não pode ser desfeita sem um backup.', () => {
         MF.state = MF.normalizeState(parsed.state);
+        if (parsed.studyProgress) MF.StudyCenter?.importProgress(parsed.studyProgress);
         MF.state.reviewItems = MF.state.reviewItems.filter(item => item && typeof item.id === 'string' && MF.getModule(item.moduleId) && item.question && MF.validateQuestion(item.question));
         MF.save(); app.session = MF.state.activeSession || null; renderDashboard(); renderProgress(); renderReviewPage(); renderCampaign(); renderSettings();
         if (app.session && Array.isArray(app.session.questions) && app.session.questions.length) { navigate('game'); renderQuestion(); }
@@ -508,7 +511,7 @@
     $('#export-progress').addEventListener('click',exportProgress);
     $('#import-progress-file').addEventListener('change',event=>importProgress(event.target.files&&event.target.files[0]));
     ['setting-no-timer','setting-confidence','setting-reduced-motion','setting-difficulty','setting-session-length'].forEach(id=>$('#'+id).addEventListener('change',saveSettings));
-    $('#reset-progress').addEventListener('click',()=>openModal('Apagar todo o progresso?', 'XP, estatísticas, histórico, fila de revisão, campanha e preferências serão redefinidos neste navegador.', ()=>{MF.reset();app.session=null;renderDashboard();renderProgress();renderReviewPage();renderCampaign();renderSettings();toast('Progresso redefinido.');}));
+    $('#reset-progress').addEventListener('click',()=>openModal('Apagar todo o progresso?', 'XP, estatísticas, histórico, fila de revisão, campanha e preferências serão redefinidos neste navegador.', ()=>{MF.reset();MF.StudyCenter?.resetProgress();app.session=null;renderDashboard();renderProgress();renderReviewPage();renderCampaign();renderSettings();toast('Progresso redefinido.');}));
     $('#question-card').addEventListener('input',event=>{
       if (!app.session) return;
       if (event.target.classList.contains('answer-input')) { app.session.answerDraft=event.target.value; persistSession(); }
@@ -522,6 +525,7 @@
     bindEvents();
     MF.state.settings = MF.state.settings || {};
     MF.LearningUI?.init();
+    MF.StudyCenter?.init();
     MF.PythonLab?.init();
     renderDashboard(); renderModuleGrid('all-module-grid'); renderCampaign(); renderReviewPage(); renderProgress(); renderSettings();
     if (global.location && new URLSearchParams(global.location.search).get('test')==='1') {
