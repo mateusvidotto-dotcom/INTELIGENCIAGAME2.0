@@ -7,7 +7,7 @@
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   const escapeHTML = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const MODULES = MF.modules;
-  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS DE CONHECIMENTO', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
+  const labels = { home:'VISÃO GERAL', modules:'LABORATÓRIOS', game:'SESSÃO ATIVA', learning:'TRILHAS DE ESTUDO', python:'MOTOR PYTHON', campaign:'CAMPANHA OMEGA', review:'REVISÃO INTELIGENTE', progress:'EVOLUÇÃO', settings:'CONFIGURAÇÕES' };
   const iconFor = moduleId => (MF.getModule(moduleId) || {}).icon || '◈';
   const app = {
     currentView: 'home', session: null, filter: 'all', modalAction: null,
@@ -38,7 +38,7 @@
     if (view === 'review') renderReviewPage();
     if (view === 'progress') renderProgress();
     if (view === 'settings') renderSettings();
-    if (view === 'learning') MF.LearningUI?.renderTracks();
+    if (view === 'learning') { MF.LearningUI?.renderTracks(); MF.StudyCenter?.render(); }
     if (view === 'python') MF.PythonLab?.render();
   }
   function getAccuracy(stats) { return stats && stats.answered ? Math.round(stats.correct / stats.answered * 100) : null; }
@@ -522,6 +522,7 @@
     bindEvents();
     MF.state.settings = MF.state.settings || {};
     MF.LearningUI?.init();
+    MF.StudyCenter?.init();
     MF.PythonLab?.init();
     renderDashboard(); renderModuleGrid('all-module-grid'); renderCampaign(); renderReviewPage(); renderProgress(); renderSettings();
     if (global.location && new URLSearchParams(global.location.search).get('test')==='1') {
