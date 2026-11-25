@@ -30,7 +30,7 @@
             'Adjetivos geralmente aparecem antes do substantivo: a difficult question, não a question difficult.',
             'A ordem pode mudar em perguntas, negativas e construções especiais; primeiro domine a estrutura afirmativa.'
           ],
-          {label:'Exemplo',text:'My brother studies mathematics. = Meu irmão estuda matemática. Subject: My brother · Verb: studies · Complement: mathematics.'},
+          {label:'Exemplo',text:'My brother studies mathematics.',audio:'My brother studies mathematics.'},
           'Which sentence follows the usual English word order?',
           ['Studies Ana English every day.','Ana studies English every day.','English every day Ana studies.','Every day English studies Ana.'],
           1,
@@ -46,7 +46,7 @@
             'Use are com you, we, they e sujeitos plurais: They are ready.',
             'Na negativa, acrescente not: He is not tired. Na pergunta, coloque o verbo antes do sujeito: Are they ready?'
           ],
-          {label:'Exemplo',text:'We are students. / She is my friend. / I am ready. A contração I’m, she’s e we’re é comum na fala e na escrita informal.'},
+          {label:'Exemplo',text:'We are students. / She is my friend. / I am ready.',audio:'We are students. She is my friend. I am ready.'},
           'Complete the sentence: “They ___ at school today.”',
           ['am','is','are','be'],
           2,
@@ -62,7 +62,7 @@
             'Com he, she e it, normalmente acrescentamos -s ou -es: She studies; he watches.',
             'Nas negativas e perguntas, usamos do ou does. Com does, o verbo principal volta à forma base: Does she study?'
           ],
-          {label:'Exemplo',text:'I study English. / She studies English. / She does not study on Sunday. A terminação -s aparece no verbo principal quando a frase afirmativa está na terceira pessoa do singular.'},
+          {label:'Exemplo',text:'I study English. / She studies English. / She does not study on Sunday.',audio:'I study English. She studies English. She does not study on Sunday.'},
           'Choose the grammatically correct sentence.',
           ['He go to school by bus.','He goes to school by bus.','He going to school by bus.','He does goes to school by bus.'],
           1,
@@ -78,7 +78,7 @@
             'A escolha depende do som inicial, não apenas da primeira letra: an hour, a university.',
             'The é usado quando o referente é identificado ou específico no contexto.'
           ],
-          {label:'Exemplo',text:'I saw an elephant. The elephant was near a tree. Na primeira frase, o animal é introduzido; na segunda, ele já está identificado.'},
+          {label:'Exemplo',text:'I saw an elephant. The elephant was near a tree.',audio:'I saw an elephant. The elephant was near a tree.'},
           'Complete: “She wants to buy ___ umbrella.”',
           ['a','an','the','some'],
           1,
@@ -94,7 +94,7 @@
             'Palavras como but, because e so alteram a relação entre as ideias.',
             'Use o contexto para inferir uma palavra desconhecida antes de recorrer à tradução.'
           ],
-          {label:'Texto',text:'“Mia works at a library. She starts at nine o’clock and leaves at three. On Mondays, the library closes early.” Mia trabalha em uma biblioteca, começa às nove e sai às três. Às segundas, a biblioteca fecha cedo.'},
+          {label:'Texto',text:'Mia works at a library. She starts at nine o’clock and leaves at three. On Mondays, the library closes early.',audio:'Mia works at a library. She starts at nine o’clock and leaves at three. On Mondays, the library closes early.'},
           'According to the text, when does Mia start work?',
           ['At seven o’clock.','At nine o’clock.','At three o’clock.','The text does not say.'],
           1,
@@ -114,6 +114,7 @@
       color: 'blue',
       skills: ['Teoria e exemplos', 'Questões aplicadas', 'Análise de erros', 'Preparação por edição'],
       notice: 'As aulas abaixo são fundamentos autorais de estudo, não uma reprodução integral do programa oficial de uma instituição. Antes de cada prova, o conteúdo deverá ser conferido com o edital e o programa da edição correspondente.',
+      resources: [{ label:'Portal oficial do PAS/UEM',url:'https://pas.uem.br/' },{ label:'Apresentação e etapas do PAS/UEM',url:'https://pcs.uem.br/daa/estude-na-uem/graduacao/processo-de-avaliacao-seriada-pas' }],
       lessons: [
         choice('vest-math-01','Porcentagem e variação percentual','Matemática · Aritmética',
           'Calcular porcentagens e interpretar descontos sem confundir taxa com valor final.',
@@ -202,6 +203,7 @@
       color: 'gold',
       skills: ['Teoria dos números', 'Combinatória', 'Invariantes', 'Demonstração'],
       notice: 'A trilha diferencia treino objetivo e treino discursivo. Os exercícios são autorais e didáticos; não são apresentados como questões oficiais da OBMEP.',
+      resources: [{ label:'Provas e soluções oficiais da OBMEP',url:'https://relatorio.obmep.org.br/provas.htm' },{ label:'Banco oficial de questões',url:'https://server24.obmep.org.br/banco.htm' }],
       lessons: [
         choice('olymp-parity-01','Paridade: pensar em pares e ímpares','Estratégia · Paridade',
           'Usar a representação algébrica de números pares e ímpares para justificar uma conclusão.',
@@ -227,10 +229,10 @@
             'O princípio prova a existência de uma repetição, mas geralmente não identifica quais objetos serão repetidos.'
           ],
           {label:'Exemplo',text:'Entre 13 pessoas, pelo menos duas nasceram no mesmo mês, pois existem 13 pessoas e apenas 12 meses possíveis.'},
-          'Em uma sala com 25 estudantes, o que é garantido considerando apenas os dias do mês em que nasceram (1 a 31)?',
+          'Em uma sala com 32 estudantes, o que é garantido considerando apenas os dias do mês em que nasceram (1 a 31)?',
           ['Pelo menos dois nasceram no mesmo dia do mês.','Todos nasceram em meses diferentes.','Exatamente dois nasceram no mesmo dia.','Ninguém nasceu nos dias 1 a 5.'],
           0,
-          'Há 25 estudantes e 31 dias possíveis. Atenção: 25 não é maior que 31; portanto, a repetição não é garantida. A alternativa correta para este enunciado é nenhuma das opções, e o exercício foi intencionalmente construído para testar a identificação de uma hipótese insuficiente.',
+          'Há 32 estudantes e apenas 31 números possíveis para o dia do mês. Como 32 é maior que 31, pelo princípio da casa dos pombos, pelo menos duas pessoas compartilham o mesmo dia do mês.',
           'Compare o número de objetos com o número de categorias. O princípio garante repetição quando os objetos são mais numerosos que as categorias.'
         ),
         choice('olymp-divisibility-01','Divisibilidade e soma dos algarismos','Teoria dos números · Divisibilidade',
@@ -354,6 +356,7 @@
       '<div class="study-detail-toolbar"><button type="button" class="text-button" data-study-action="back">← Todas as trilhas</button><span class="study-track-eyebrow">' + escapeHTML(path.eyebrow) + '</span></div>' +
       '<section class="study-path-hero study-track-' + escapeHTML(path.color) + '"><div><div class="eyebrow">' + escapeHTML(path.level) + '</div><h2>' + escapeHTML(path.title) + '</h2><p>' + escapeHTML(path.description) + '</p><div class="study-skill-list">' + path.skills.map(function (skill) { return '<span>' + escapeHTML(skill) + '</span>'; }).join('') + '</div></div><div class="study-path-score"><strong>' + percent + '%</strong><span>concluído</span><div class="study-track-progress"><span style="width:' + percent + '%"></span></div><small>' + done + ' de ' + path.lessons.length + ' aulas</small></div></section>' +
       '<div class="study-notice"><strong>Escopo desta versão</strong><p>' + escapeHTML(path.notice) + '</p></div>' +
+      (path.resources && path.resources.length ? '<div class="study-resources"><strong>Fontes oficiais para continuar estudando</strong>' + path.resources.map(function (resource) { return '<a href="' + escapeHTML(resource.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(resource.label) + ' ↗</a>'; }).join('') + '</div>' : '') +
       '<div class="study-lessons-heading"><div><div class="eyebrow">PERCURSO DE APRENDIZAGEM</div><h3>Aulas e desafios</h3></div><span>' + path.lessons.length + ' unidades iniciais</span></div>' +
       '<div class="study-lesson-list">' + path.lessons.map(function (lesson, index) {
         const isDone = !!data.completed[lesson.id];
@@ -378,8 +381,8 @@
     const questionMarkup = isOpen
       ? '<div class="study-open-task"><label for="study-open-answer">' + escapeHTML(question.prompt) + '</label><textarea id="study-open-answer" rows="6" placeholder="Escreva seu raciocínio, justificando cada etapa..."></textarea><div class="study-rubric"><strong>Autoavaliação da demonstração</strong><p>Marque os critérios que sua resposta realmente atende. Não marque um critério apenas por ter utilizado uma palavra semelhante.</p>' + question.rubric.map(function (item, index) { return '<label><input type="checkbox" name="study-rubric" value="' + index + '"><span>' + escapeHTML(item) + '</span></label>'; }).join('') + '</div><button type="button" class="button button-primary" data-study-action="self-check">Comparar com os critérios</button></div>'
       : '<div class="study-options">' + question.options.map(function (option, index) { return '<label class="study-option"><input type="radio" name="study-answer" value="' + index + '"><span>' + escapeHTML(option) + '</span></label>'; }).join('') + '</div><button type="button" class="button button-primary" data-study-action="submit">Verificar resposta</button>';
-    const audioButton = path.id === 'english' && lesson.example && lesson.example.text
-      ? '<button type="button" class="button button-ghost" data-study-speak="' + escapeHTML(lesson.example.text) + '">Ouvir exemplo em inglês <span aria-hidden="true">▶</span></button>'
+    const audioButton = path.id === 'english' && lesson.example && (lesson.example.audio || lesson.example.text)
+      ? '<button type="button" class="button button-ghost" data-study-speak="' + escapeHTML(lesson.example.audio || lesson.example.text) + '">Ouvir exemplo em inglês <span aria-hidden="true">▶</span></button>'
       : '';
     root.innerHTML =
       '<div class="study-detail-toolbar"><button type="button" class="text-button" data-study-action="back">← Voltar para ' + escapeHTML(path.title) + '</button><span class="study-track-eyebrow">' + escapeHTML(lesson.unit) + '</span></div>' +
