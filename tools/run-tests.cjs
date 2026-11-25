@@ -75,4 +75,13 @@ if (!Array.isArray(studyPaths) || studyPaths.length !== 3) {
     console.error('As trilhas de inglês, vestibular e olimpíadas devem estar presentes.'); process.exitCode = 1;
   }
   if (!process.exitCode) console.log('PASSOU: centro de estudos com ' + studyPaths.length + ' trilhas e ' + lessonCount + ' aulas iniciais validadas.');
+  const originalStudyProgress = MF.StudyCenter.exportProgress();
+  const importedStudyProgress = MF.StudyCenter.importProgress({version:1,completed:{'en-a1-01':true,'unknown-lesson':true}});
+  const englishStudyProgress = MF.StudyCenter.progress().english;
+  if (!importedStudyProgress || englishStudyProgress.completed !== 1 || englishStudyProgress.percent !== 20) {
+    console.error('Importação ou cálculo de progresso das trilhas falhou.'); process.exitCode = 1;
+  }
+  MF.StudyCenter.importProgress(originalStudyProgress);
+  if (!process.exitCode) console.log('PASSOU: exportação, importação e progresso local das trilhas.');
+
 }
