@@ -36,8 +36,8 @@
       try { if (global.localStorage) global.localStorage.removeItem(STORAGE_KEY); return true; }
       catch (error) { console.warn('[Mind Forge] Não foi possível limpar o armazenamento:', error); return false; }
     },
-    export(state) {
-      return JSON.stringify({ app: 'Mind Forge Omega', schemaVersion: 1, exportedAt: new Date().toISOString(), state }, null, 2);
+    export(state, studyProgress) {
+      return JSON.stringify({ app: 'Mind Forge Omega', schemaVersion: 1, exportedAt: new Date().toISOString(), state, studyProgress: studyProgress || null }, null, 2);
     },
     validateImport(parsed) {
       if (!parsed || typeof parsed !== 'object' || parsed.app !== 'Mind Forge Omega' || parsed.schemaVersion !== 1 || !parsed.state || typeof parsed.state !== 'object') {
@@ -49,6 +49,9 @@
       }
       if (!Array.isArray(s.reviewItems) || !s.settings || typeof s.settings !== 'object') {
         return { ok: false, reason: 'O backup está incompleto e não pode ser importado com segurança.' };
+      }
+      if (parsed.studyProgress !== undefined && parsed.studyProgress !== null && (!parsed.studyProgress || parsed.studyProgress.version !== 1 || !parsed.studyProgress.completed || typeof parsed.studyProgress.completed !== 'object' || Array.isArray(parsed.studyProgress.completed))) {
+        return { ok: false, reason: 'O backup contém dados inválidos das trilhas de estudo.' };
       }
       return { ok: true };
     }
