@@ -21,7 +21,7 @@ const files = [
   'scripts/modules/creativity.js', 'scripts/modules/mathematics.js', 'scripts/modules/advanced-math-bank.js', 'scripts/modules/critical-thinking.js',
   'scripts/modules/bible.js', 'scripts/modules/science.js', 'scripts/modules/language.js',
   'scripts/modules/strategy.js', 'scripts/modules/interdisciplinary.js', 'scripts/modules/metacognition.js',
-  'scripts/core/quality-overrides.js', 'scripts/modules/study-center.js', 'scripts/tests/self-tests.js'
+  'scripts/core/quality-overrides.js', 'scripts/modules/study-center.js', 'scripts/data/study-programs.js', 'scripts/modules/study-expansion.js', 'scripts/tests/self-tests.js'
 ];
 for (const file of files) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'), context, { filename:file, timeout: 5000 });
 const MF = context.MindForge;
@@ -71,7 +71,7 @@ if (!Array.isArray(studyPaths) || studyPaths.length !== 3) {
       }
     }
   }
-  const pigeonholeLesson = studyPaths.find(path => path.id === 'olympiad')?.lessons.find(lesson => lesson.id === 'olymp-pigeonhole-01');
+  const pigeonholeLesson = studyPaths.find(path => path.id === 'olympiad')?.lessons.find(lesson => lesson.id === 'olymp-pigeon-01');
   if (!pigeonholeLesson || !pigeonholeLesson.question.prompt.includes('32 estudantes') || pigeonholeLesson.question.answer !== 0) {
     console.error('O exemplo do princípio da casa dos pombos precisa manter a quantidade correta de objetos e categorias.'); process.exitCode = 1;
   }
@@ -82,10 +82,44 @@ if (!Array.isArray(studyPaths) || studyPaths.length !== 3) {
   const originalStudyProgress = MF.StudyCenter.exportProgress();
   const importedStudyProgress = MF.StudyCenter.importProgress({version:1,completed:{'en-a1-01':true,'unknown-lesson':true}});
   const englishStudyProgress = MF.StudyCenter.progress().english;
-  if (!importedStudyProgress || englishStudyProgress.completed !== 1 || englishStudyProgress.percent !== 20) {
+  if (!importedStudyProgress || englishStudyProgress.completed !== 1 || englishStudyProgress.percent !== 4) {
     console.error('Importação ou cálculo de progresso das trilhas falhou.'); process.exitCode = 1;
   }
   MF.StudyCenter.importProgress(originalStudyProgress);
   if (!process.exitCode) console.log('PASSOU: exportação, importação e progresso local das trilhas.');
 
+}
+
+
+// Validate the expanded CEFR, PAS/UEM and OBMEP learning systems.
+const expanded = MF.StudyExpansion;
+if (!expanded) { console.error('Módulo de expansão não foi carregado.'); process.exitCode = 1; }
+else {
+  const counts = expanded.counts();
+  const expectedLevels = ['A1','A2','B1','B2','C1','C2'];
+  if (JSON.stringify(counts.englishLevels) !== JSON.stringify(expectedLevels) || counts.englishLessons < 25) {
+    console.error('A trilha de inglês não cobre os seis níveis CEFR.'); process.exitCode = 1;
+  }
+  const englishLessons = studyPaths.find(path => path.id === 'english').lessons;
+  if (englishLessons.filter(lesson => lesson.listening).length !== 6 || englishLessons.filter(lesson => lesson.speaking).length !== 6) {
+    console.error('Cada nível CEFR precisa de uma prática de listening e speaking.'); process.exitCode = 1;
+  }
+  if (counts.obmepFirstPhase !== 20 || counts.obmepSecondPhase !== 6) {
+    console.error('Banco OBMEP deve conter 20 itens objetivos e 6 discursivos.'); process.exitCode = 1;
+  }
+  const objective = studyPaths.find(path => path.id === 'olympiad').lessons.filter(lesson => lesson.phase === 'first-phase');
+  if (objective.some(lesson => lesson.question.options.length !== 5)) {
+    console.error('Todos os itens autorais da 1ª fase devem apresentar cinco alternativas.'); process.exitCode = 1;
+  }
+  const pas = expanded.pasItems[0];
+  const perfect = expanded.scorePasItem(pas, [1,4,16]);
+  const partial = expanded.scorePasItem(pas, [1]);
+  const wrong = expanded.scorePasItem(pas, [1,2]);
+  if (perfect.points !== 6 || partial.points !== 2 || wrong.points !== 0) {
+    console.error('Pontuação demonstrativa do formato PAS/UEM incorreta.'); process.exitCode = 1;
+  }
+  if (counts.pasTopics < 50) {
+    console.error('Programa de referência PAS/UEM não foi carregado integralmente.'); process.exitCode = 1;
+  }
+  if (!process.exitCode) console.log('PASSOU: CEFR A1–C2, seis atividades de escuta e fala, PAS/UEM e banco OBMEP 20+6.');
 }
