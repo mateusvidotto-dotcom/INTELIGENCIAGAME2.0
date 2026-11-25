@@ -71,6 +71,10 @@ if (!Array.isArray(studyPaths) || studyPaths.length !== 3) {
       }
     }
   }
+  const pigeonholeLesson = studyPaths.find(path => path.id === 'olympiad')?.lessons.find(lesson => lesson.id === 'olymp-pigeonhole-01');
+  if (!pigeonholeLesson || !pigeonholeLesson.question.prompt.includes('32 estudantes') || pigeonholeLesson.question.answer !== 0) {
+    console.error('O exemplo do princípio da casa dos pombos precisa manter a quantidade correta de objetos e categorias.'); process.exitCode = 1;
+  }
   if (!studyPaths.some(path => path.id === 'english') || !studyPaths.some(path => path.id === 'vestibular') || !studyPaths.some(path => path.id === 'olympiad')) {
     console.error('As trilhas de inglês, vestibular e olimpíadas devem estar presentes.'); process.exitCode = 1;
   }
