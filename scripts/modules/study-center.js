@@ -342,6 +342,7 @@
       '<div><strong>02 · Resolver</strong><p>Exercícios com feedback, pistas graduais e justificativas.</p></div>' +
       '<div><strong>03 · Consolidar</strong><p>Conclusão de aulas registrada localmente para orientar sua continuidade.</p></div>' +
       '</div></div>';
+    updateDashboard();
   }
 
   function renderPath(id) {
@@ -364,6 +365,7 @@
           '<span class="study-lesson-number">' + String(index + 1).padStart(2, '0') + '</span><span class="study-lesson-copy"><strong>' + escapeHTML(lesson.title) + '</strong><small>' + escapeHTML(lesson.unit) + ' · ' + escapeHTML(lesson.objective) + '</small></span>' +
           '<span class="study-lesson-status">' + (isDone ? 'Concluída ✓' : 'Estudar →') + '</span></button>';
       }).join('') + '</div>';
+    updateDashboard();
   }
 
   function renderLesson(lessonId) {
@@ -491,7 +493,50 @@
         return result;
       }, {});
     },
-    resetProgress: function () { saveProgress({ completed: {} }); renderOverview(); }
+    exportProgress: function () {
+      return { version: 1, completed: Object.assign({}, storage().completed) };
+    },
+    importProgress: function (payload) {
+      if (!payload || payload.version !== 1 || !payload.completed || typeof payload.completed !== 'object' || Array.isArray(payload.completed)) return false;
+      const known = new Set(paths.reduce(function (ids, path) { return ids.concat(path.lessons.map(function (lesson) { return lesson.id; })); }, []));
+      const completed = {};
+      Object.keys(payload.completed).forEach(function (id) {
+        if (known.has(id) && payload.completed[id] === true) completed[id] = true;
+      });
+      saveProgress({ version: 1, completed: completed });
+      updateDashboard();
+      renderProgress();
+      return true;
+    },
+    updateDashboard: function () {
+      const doc = documentRef();
+      if (!doc) return;
+      doc.querySelectorAll('[data-study-progress]').forEach(function (node) {
+        const path = pathById(node.dataset.studyProgress);
+        if (path) node.textContent = progressPercent(path) + '% concluído';
+      });
+      doc.querySelectorAll('[data-study-bar]').forEach(function (node) {
+        const path = pathById(node.dataset.studyBar);
+        if (path) node.style.width = progressPercent(path) + '%';
+      });
+    },
+    renderProgress: function () {
+      const doc = documentRef();
+      const root = doc && doc.getElementById('study-path-progress-list');
+      if (!root) return;
+      root.innerHTML = paths.map(function (path) {
+        const percent = progressPercent(path);
+        return '<div class="study-progress-row"><div class="study-progress-row-copy"><strong>' + escapeHTML(path.title) + '</strong><span>' + completedCount(path) + ' de ' + path.lessons.length + ' aulas concluídas</span></div><div class="study-progress-row-track"><span style="width:' + percent + '%"></span></div><strong class="study-progress-percent">' + percent + '%</strong></div>';
+      }).join('');
+    },
+    resetProgress: function () {
+      saveProgress({ version: 1, completed: {} });
+      state.pathId = null;
+      state.lessonId = null;
+      renderOverview();
+      updateDashboard();
+      renderProgress();
+    }
   };
 
   global.MindForge = global.MindForge || {};
