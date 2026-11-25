@@ -366,6 +366,7 @@
           '<span class="study-lesson-status">' + (isDone ? 'Concluída ✓' : 'Estudar →') + '</span></button>';
       }).join('') + '</div>';
     api.updateDashboard();
+    if (typeof api.renderPathExtension === 'function') api.renderPathExtension(path.id);
   }
 
   function renderLesson(lessonId) {
@@ -396,6 +397,7 @@
       '<div class="study-help-row"><button type="button" class="text-button" data-study-action="hint">Revelar uma pista</button><div id="study-hint" class="study-hint" hidden>' + escapeHTML(question.hint) + '</div></div><div id="study-feedback" aria-live="polite"></div>' +
       '<button type="button" class="button button-secondary study-complete-button" data-study-action="complete" ' + (completed ? 'disabled' : 'disabled') + '>' + (completed ? 'Aula já concluída ✓' : 'Marcar aula como concluída') + '</button>' +
       '</div></article>';
+    if (typeof api.renderLessonExtension === 'function') api.renderLessonExtension(path, lesson);
   }
 
   function showFeedback(message, correct) {
