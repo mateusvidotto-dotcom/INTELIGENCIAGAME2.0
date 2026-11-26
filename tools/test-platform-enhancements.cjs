@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const store=new Map(),localStorage={getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)};
-const root={dataset:{},setAttribute(k,v){this.dataset[k]=v;}},document={documentElement:root,querySelector(){return{setAttribute(){}};}};
+const root={dataset:{},setAttribute(k,v){const name=k.replace(/^data-/,'').replace(/-([a-z])/g,(_,c)=>c.toUpperCase());this.dataset[name]=v;}},document={documentElement:root,querySelector(){return{setAttribute(){}};}};
 const en={version:1,completed:{},attempts:[],listening:{},speaking:{},writing:{},vocab:{},daily:{}};
 const lg={app:'Mind Forge Logic Forge',schemaVersion:1,state:{schemaVersion:1,attempts:[],questions:{},completed:[],projects:{},preferences:{dailyLimit:12}}};
 const sandbox={localStorage,document,Date,JSON,Object,Array,Set,Number,String,Math,matchMedia:()=>({matches:false,addEventListener(){}}),MindForgeEnglish:{exportProgress:()=>en,validateProgress:v=>!!v&&v.version===1&&Array.isArray(v.attempts)},MindForgeLogic:{exportProgress:()=>lg,validateProgress:v=>!!v&&v.app==='Mind Forge Logic Forge'&&v.schemaVersion===1}};
