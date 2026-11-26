@@ -30,12 +30,15 @@ jobs:
           node --check question-bank.js
           node --check english-forge.js
           node --check logic-forge.js
+          node --check platform-enhancements.js
           node --check worker/src/index.js
           find scripts worker -name '*.js' -print0 | xargs -0 -n 1 node --check
       - name: Audit static HTML and local resources
         run: |
           python tools/audit_site.py --inline-output /tmp/mind-forge-inline.js
           node --check /tmp/mind-forge-inline.js
+      - name: Test storage migration and unified backup
+        run: node tools/test-platform-enhancements.cjs
       - name: Test Logic Forge curriculum and backup
         run: node tools/test-logic-forge.cjs
       - name: Test Tutor Worker boundaries and rate limiting
