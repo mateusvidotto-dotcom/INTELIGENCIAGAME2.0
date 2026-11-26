@@ -1,0 +1,7 @@
+name = "mind-forge-tutor"
+main = "src/index.js"
+compatibility_date = "2026-11-25"
+
+[vars]
+SITE_ORIGIN = "https://mateusvidotto-dotcom.github.io"
+OPENAI_MODEL = "gpt-6.2-astra"
