@@ -28,7 +28,7 @@ O backend FastAPI em `backend/app` funciona localmente com SQLite. Ele valida pa
 
 O `worker/src/index.js` é um proxy separado para a Responses API. A chave fica como segredo do Worker, não no JavaScript público. O Tutor integrado só funciona quando o administrador configura o Worker e a pessoa fornece sua URL na interface. O Python Core não tem provedor de IA próprio.
 
-O Worker restringe a origem por CORS, mas CORS não é autenticação. O binding `TUTOR_RATE_LIMITER` é obrigatório; o Worker falha de forma segura quando não está configurado ou fica indisponível. Mensagens enviadas ao Tutor deixam o aparelho e devem ser tratadas como conteúdo externo.
+O Worker restringe a origem por CORS, mas CORS não é autenticação. O binding `TUTOR_RATE_LIMITER` é obrigatório e está declarado em `worker/wrangler.toml`; o Worker falha de forma segura quando ele não está configurado ou fica indisponível. O limite nativo é aproximado por localização Cloudflare e por IP, não substitui um teto global do provedor. Mensagens enviadas ao Tutor deixam o aparelho e devem ser tratadas como conteúdo externo.
 
 ## Limites conhecidos
 
