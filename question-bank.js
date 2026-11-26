@@ -789,7 +789,7 @@
           "Apresentar o resultado sem demonstrar por que o invariante vale em todos os passos.")
       ], obmepRef,"OBMEP — provas e soluções"),
     U("ob1-combinatoria-contagem","Raciocínio olímpico","Contagem e princípio multiplicativo","Casos, restrições e contagem sem repetição","Contar configurações, evitar dupla contagem e justificar a estratégia escolhida.","OBMEP","Intermediário",
-      "Desafio — Uma senha tem três algarismos distintos, escolhidos entre 0, 1, 2, 3 e 4. O primeiro algarismo não pode ser zero.",
+      "Desafio — Um número natural tem três algarismos distintos, escolhidos entre 0, 1, 2, 3 e 4. O primeiro algarismo não pode ser zero.",
       ["A primeira posição tem 4 opções (1 a 4).","Depois de escolhê-la, restam 4 opções para a segunda e 3 para a terceira."],
       "Conte as escolhas por etapa e atualize as opções disponíveis após cada escolha.",
       [
