@@ -15,6 +15,6 @@ Não publique detalhes exploráveis em uma issue pública. Use os recursos priva
 ## Operação
 
 - Não publique o backend FastAPI local sem autenticação e isolamento por usuário.
-- Configure rate limiting e limites de custo no Tutor antes de divulgar o endpoint amplamente.
+- Configure o binding obrigatório `TUTOR_RATE_LIMITER` e limites de custo no Tutor antes de divulgar o endpoint. Sem o binding, o Worker bloqueia chamadas pagas.
 - Mantenha dependências e Actions atualizadas.
 - Verifique os logs/alertas do provedor sem adicionar telemetria de estudantes.
