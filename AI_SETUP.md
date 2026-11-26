@@ -22,7 +22,7 @@ O site GitHub Pages é estático. Para usar uma IA de verdade sem publicar uma c
 4. Publique:
    `npx wrangler deploy`
 5. Copie a URL `workers.dev` exibida pelo Wrangler, acrescentando `/api/tutor`.
-6. Configure no painel Cloudflare um binding de Rate Limiting chamado exatamente `TUTOR_RATE_LIMITER`, com uma política conservadora por IP. Sem o binding, ou se ele ficar indisponível, o Worker retorna HTTP 503 sem chamar a API paga.
+6. A configuração já está em `worker/wrangler.toml`. Antes de publicar, confira se `namespace_id = "202611260853"` é único na sua conta Cloudflare; se já for usado, troque por outro inteiro positivo. Publique o Worker a partir da pasta `worker`. O limite inicial é 20 chamadas por minuto por IP e por localização Cloudflare. Sem o binding, ou se ele ficar indisponível, o Worker retorna HTTP 503 sem chamar a API paga.
 7. Abra o site, entre em **Tutor IA → Conectar a IA**, cole a URL e salve.
 8. Use **Testar conexão**. O teste consulta `/health`.
 
@@ -36,7 +36,7 @@ O arquivo `wrangler.toml` define a origem permitida e o modelo padrão. Caso o m
 - **Nunca** coloque `OPENAI_API_KEY` no `index.html`, em arquivos `.js` públicos, no GitHub ou no campo de URL do site.
 - Não envie senhas, dados pessoais ou material sensível ao tutor.
 - O Worker não grava conversas em banco próprio. A chamada usa `store: false`, que desativa o armazenamento da resposta pela Responses API; isso não é uma promessa de que nenhum sistema do provedor processe ou retenha qualquer dado. Consulte a política vigente do provedor.
-- A URL do Worker é pública. CORS não autentica chamadas nem impede clientes automatizados. O binding `TUTOR_RATE_LIMITER` é obrigatório: sem ele, o Worker bloqueia as chamadas pagas. Defina limites de gastos e acompanhe o consumo. A limitação por IP pode afetar pessoas que compartilham a mesma rede.
+- A URL do Worker é pública. CORS não autentica chamadas nem impede clientes automatizados. O binding `TUTOR_RATE_LIMITER` é obrigatório. O limite nativo é aproximado e separado por localização Cloudflare; não é um teto global de gastos. O IP pode ser compartilhado por pessoas na mesma escola, casa ou rede móvel. Configure também um limite de gastos no provedor da API. Para um teto estrito global, será necessário um contador central, por exemplo com Durable Objects.
 - CORS reduz chamadas feitas por páginas de outras origens, mas não é autenticação e não impede chamadas diretas automatizadas.
 
 ## Música ambiente
