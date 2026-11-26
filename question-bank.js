@@ -8,7 +8,7 @@
     { concept, steps, alternatives, takeaway, trap }
   ];
   const U = (id, area, title, topic, goal, exams, level, passage, examples, tip, questions, reference, referenceLabel, writing) => ({
-    id, area, title, topic, goal, exams, level, passage, examples, tip, q: questions,
+    id, area, title, topic, goal, exams, level, passage, examples, tip, text: topic + ". " + goal, q: questions,
     reference, referenceLabel, writing,
     authored: true
   });
