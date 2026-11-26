@@ -63,7 +63,7 @@
         Q("Se o consumo inicial do mês seguinte voltar a 320 kWh e houver nova redução de 15%, o valor final será",["272 kWh novamente, pois a taxa incide sobre a mesma base","231,2 kWh, pois a redução seguinte incide sobre 272 kWh","305 kWh, pois se subtraem 15 unidades","368 kWh, pois a taxa representa aumento","320 kWh, pois percentuais não alteram o consumo"],0,
           "Percentuais iguais aplicados a bases iguais produzem a mesma variação absoluta e o mesmo resultado.",
           ["Identifique a base do segundo mês: 320 kWh.","A taxa de redução continua sendo 15%.","Calcule 320 × 0,85 = 272 kWh."],
-          ["A alternativa coincide com o resultado, mas a justificativa correta é a taxa sobre a mesma base; cuidado com a palavra 'igual'.","As reduções não se acumulam automaticamente quando cada mês retorna a 320 kWh.","O resultado correto é 272 kWh.","305 subtrai 15 unidades em vez de 15%.","Essa conta representa aumento de 15%."],
+          ["272 kWh é o resultado correto: o mês começa novamente em 320 kWh e a taxa incide sobre essa mesma base.","231,2 kWh reaplicaria os 15% sobre 272 kWh, mas o enunciado informa que a base voltou a 320 kWh.","305 kWh resulta de subtrair 15 unidades, confundindo percentual com quantidade fixa.","368 kWh representa aumento de 15%, não redução.","320 kWh ignora a redução informada."],
           "Aplique cada percentual à base indicada no enunciado; não some taxas sem verificar a sequência.",
           "Assumir que percentuais se acumulam mesmo quando a base é reiniciada.")
       ], enemRef,"Matriz de Referência do ENEM"),
