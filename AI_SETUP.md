@@ -9,6 +9,7 @@ O site GitHub Pages é estático. Para usar uma IA de verdade sem publicar uma c
 - Chave da API lida exclusivamente de um segredo do Worker.
 - Requisições com `store: false` e histórico curto mantido pelo navegador durante a sessão.
 - CORS limitado à origem do site GitHub Pages.
+- Rate Limiting obrigatório: sem o binding `TUTOR_RATE_LIMITER`, o Worker bloqueia as chamadas antes de encaminhar requisições pagas.
 
 ## Implantação
 
@@ -21,8 +22,9 @@ O site GitHub Pages é estático. Para usar uma IA de verdade sem publicar uma c
 4. Publique:
    `npx wrangler deploy`
 5. Copie a URL `workers.dev` exibida pelo Wrangler, acrescentando `/api/tutor`.
-6. Abra o site, entre em **Tutor IA → Conectar a IA**, cole a URL e salve.
-7. Use **Testar conexão**. O teste consulta `/health`.
+6. Configure no painel Cloudflare um binding de Rate Limiting chamado exatamente `TUTOR_RATE_LIMITER`, com uma política conservadora por IP. Sem o binding, ou se ele ficar indisponível, o Worker retorna HTTP 503 sem chamar a API paga.
+7. Abra o site, entre em **Tutor IA → Conectar a IA**, cole a URL e salve.
+8. Use **Testar conexão**. O teste consulta `/health`.
 
 O arquivo `wrangler.toml` define a origem permitida e o modelo padrão. Caso o modelo padrão não esteja habilitado na sua conta, altere `OPENAI_MODEL` para um modelo disponível no seu projeto e publique novamente.
 
@@ -34,7 +36,7 @@ O arquivo `wrangler.toml` define a origem permitida e o modelo padrão. Caso o m
 - **Nunca** coloque `OPENAI_API_KEY` no `index.html`, em arquivos `.js` públicos, no GitHub ou no campo de URL do site.
 - Não envie senhas, dados pessoais ou material sensível ao tutor.
 - O Worker não grava conversas em banco próprio. A chamada usa `store: false`, que desativa o armazenamento da resposta pela Responses API; isso não é uma promessa de que nenhum sistema do provedor processe ou retenha qualquer dado. Consulte a política vigente do provedor.
-- A URL do Worker é pública. CORS não autentica chamadas nem impede clientes automatizados. Antes de divulgar amplamente, configure um binding de Rate Limiting chamado `TUTOR_RATE_LIMITER` (o Worker o utiliza quando configurado), acompanhe o consumo e estabeleça limites de gastos. A limitação por IP pode afetar pessoas que compartilham a mesma rede.
+- A URL do Worker é pública. CORS não autentica chamadas nem impede clientes automatizados. O binding `TUTOR_RATE_LIMITER` é obrigatório: sem ele, o Worker bloqueia as chamadas pagas. Defina limites de gastos e acompanhe o consumo. A limitação por IP pode afetar pessoas que compartilham a mesma rede.
 - CORS reduz chamadas feitas por páginas de outras origens, mas não é autenticação e não impede chamadas diretas automatizadas.
 
 ## Música ambiente
