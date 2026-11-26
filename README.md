@@ -1,4 +1,4 @@
-# MIND FORGE OMEGA ∞ — v2.2 · Quatro pilares de aprendizagem
+# MIND FORGE OMEGA ∞ — v2.3 · Quatro pilares de aprendizagem
 
 Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva o conteúdo e os laboratórios existentes; oferece quatro pilares conectados: inglês, preparação acadêmica, matemática olímpica e lógica/programação. O objetivo é domínio progressivo, não competição.
 
@@ -109,3 +109,10 @@ PYTHONPATH=. python -m pytest
 - \`tools/\`: testes e auditoria de questões.
 
 Consulte \`docs/architecture.md\`, \`docs/pedagogy.md\`, \`docs/deployment.md\` e \`docs/roadmap.md\`.
+
+
+## Segurança e acessibilidade — v2.3
+
+O controlador principal fica em `scripts/site.js`, fora do HTML. A página usa CSP por meta com `script-src 'self'`, sem `eval` e sem scripts inline. O Tutor integrado aceita URLs HTTPS no domínio padrão `*.workers.dev`. A navegação utiliza ícones SVG com texto visível, os cartões dos quatro pilares são botões acessíveis por teclado e a home apresenta conteúdo inicial antes da execução do JavaScript. A auditoria automática foi ampliada para verificar essas garantias.
+
+A CSP por meta é uma proteção parcial: GitHub Pages não permite configurar todos os cabeçalhos HTTP. Consulte `SECURITY.md` e `docs/deployment.md` para os limites conhecidos.
