@@ -1,19 +1,35 @@
-# Desenvolvimento e publicação
+# Desenvolvimento, implantação e modo offline
 
-## Frontend independente
+## Frontend estático
 
-Envie o conteúdo do repositório ao GitHub e habilite Pages para publicar a raiz. O frontend continua funcionando com os sistemas locais em JavaScript. Os dados ficam no navegador.
+Publique a raiz do repositório com GitHub Pages. O site usa caminhos relativos para continuar funcionando em um subdiretório, como `/INTELIGENCIAGAME2.0/`.
+
+Para executar localmente:
+```bash
+python -m http.server 5500
+```
+Abra `http://127.0.0.1:5500`.
+
+## PWA e cache offline
+
+O usuário precisa visitar o site online pelo menos uma vez para que o service worker armazene o app shell. Depois, a página principal, o banco e os módulos locais podem continuar disponíveis sem rede. Tutor IA, reconhecimento de voz do navegador, downloads externos e outros serviços não são garantidos offline.
+
+O cache tem versão explícita em `service-worker.js`. Ao publicar uma alteração nos recursos, aumente `CACHE_NAME` para substituir o shell anterior. O escopo do service worker é relativo à pasta publicada no GitHub Pages.
 
 ## Python Core local
 
-Use `scripts/windows/start-backend.bat` e `scripts/windows/start-frontend.bat` no Windows; ou `scripts/start-backend.sh` e `scripts/start-frontend.sh` em macOS/Linux. Frontend em `http://127.0.0.1:5500` e API em `http://127.0.0.1:8000`.
+Use `scripts/windows/start-backend.bat` e `scripts/windows/start-frontend.bat` no Windows; ou `scripts/start-backend.sh` e `scripts/start-frontend.sh` em macOS/Linux. API local em `http://127.0.0.1:8000`; frontend em `http://127.0.0.1:5500`.
 
-Na tela Motor Python, salve `http://127.0.0.1:8000` e teste a conexão.
+O backend local é de usuário único e não tem autenticação multiusuário. Não o exponha diretamente à internet.
 
-## API pública
+## Tutor IA opcional
 
-Não exponha a instância local. Antes de publicar o backend, adicione autenticação, autorização e isolamento por usuário, limitação de requisições, política de retenção, backups e gestão de segredos. Configure `MFO_CORS_ORIGINS` apenas com a origem exata do frontend implantado.
+Consulte `AI_SETUP.md`. A chave OpenAI deve ser configurada como segredo do Cloudflare Worker. Nunca a coloque no HTML, JavaScript público, localStorage, commit ou backup.
 
-## GitHub Actions
+CORS aceita somente a origem configurada, mas isso não autentica o cliente. Para uso público, configure o binding Cloudflare Rate Limiting chamado `TUTOR_RATE_LIMITER`, monitore consumo e defina um teto de gastos. A política por IP pode limitar pessoas que compartilham uma rede. O Worker responde com erro de serviço se o binding estiver configurado e indisponível.
 
-O workflow executa checagem de sintaxe JS, auditoria do banco de questões, testes JS e testes pytest do backend. Ele não hospeda nem inicia o backend de produção.
+## Integração contínua
+
+O workflow `.github/workflows/quality.yml` executa checagem de sintaxe JavaScript, auditoria estrutural de HTML e links locais, testes do Logic Forge, testes do núcleo modular, auditoria do banco de questões e testes do backend Python.
+
+Esses testes não substituem inspeção visual em navegadores reais, testes com teclado e leitores de tela, avaliação de segurança do Worker ou revisão pedagógica humana.

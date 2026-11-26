@@ -28,10 +28,13 @@ O arquivo `wrangler.toml` define a origem permitida e o modelo padrão. Caso o m
 
 ## Proteção e privacidade
 
+- Ao enviar uma pergunta ao Tutor integrado, o texto e o histórico recente saem do aparelho e são enviados ao Cloudflare Worker e ao provedor de IA. Não inclua nome completo, endereço, telefone, escola, senhas ou outros dados pessoais.
+- A interface deve mostrar este aviso antes do envio e lembrar que respostas de IA podem conter erros; confira o conteúdo em materiais confiáveis.
+
 - **Nunca** coloque `OPENAI_API_KEY` no `index.html`, em arquivos `.js` públicos, no GitHub ou no campo de URL do site.
 - Não envie senhas, dados pessoais ou material sensível ao tutor.
-- O Worker não armazena conversas. A chamada à API usa `store: false`; isso desativa o armazenamento da resposta pela Responses API, mas não significa que a solicitação nunca seja processada ou retida por qualquer sistema.
-- A URL do Worker é pública. Antes de divulgar amplamente, configure regras de rate limiting no Cloudflare para limitar requisições por IP, acompanhe o uso da API e estabeleça limites de gastos no provedor.
+- O Worker não grava conversas em banco próprio. A chamada usa `store: false`, que desativa o armazenamento da resposta pela Responses API; isso não é uma promessa de que nenhum sistema do provedor processe ou retenha qualquer dado. Consulte a política vigente do provedor.
+- A URL do Worker é pública. CORS não autentica chamadas nem impede clientes automatizados. Antes de divulgar amplamente, configure um binding de Rate Limiting chamado `TUTOR_RATE_LIMITER` (o Worker o utiliza quando configurado), acompanhe o consumo e estabeleça limites de gastos. A limitação por IP pode afetar pessoas que compartilham a mesma rede.
 - CORS reduz chamadas feitas por páginas de outras origens, mas não é autenticação e não impede chamadas diretas automatizadas.
 
 ## Música ambiente

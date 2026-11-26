@@ -1,13 +1,20 @@
-# MIND FORGE OMEGA ∞ — v2.1 · Núcleo acadêmico expandido
+# MIND FORGE OMEGA ∞ — v2.2 · Quatro pilares de aprendizagem
 
-Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva os laboratórios originais, a Expedição Omega, a revisão inteligente, os relatórios e o Python Core; amplia as trilhas prioritárias de inglês, vestibulares e matemática olímpica.
+Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva o conteúdo e os laboratórios existentes; oferece quatro pilares conectados: inglês, preparação acadêmica, matemática olímpica e lógica/programação. O objetivo é domínio progressivo, não competição.
 
 ## English Forge — curso completo conectado ao site
 
 A página principal carrega o módulo independente `english-forge.js` e os estilos em `english-forge.css`. O curso oferece seis níveis CEFR, 18 unidades, 71 questões com explicação de cada alternativa, 72 cartões de vocabulário com revisão espaçada local, seis tarefas de listening, seis de speaking e seis de writing. Inclui apoio opcional em português nas aulas, uma rotina diária de 30 minutos e cadernos de erros e rascunhos locais. Consulte `ENGLISH_FORGE_GUIDE.md` para o método de estudo e as limitações de áudio/fala.
 
+## Logic Forge — lógica e programação do zero ao avançado
+
+O quarto pilar é um curso autoral com **6 níveis, 20 unidades e 40 exercícios**. Vai do pensamento computacional sem computador até estruturas de dados, algoritmos, engenharia de software, matemática discreta, grafos e minimax aplicado ao xadrez. Cada exercício apresenta pistas graduais, resolução passo a passo, análise de alternativas e uma armadilha comum. Inclui mini-projetos, revisão local e backup independente.
+
+Esta primeira versão ensina leitura e rastreamento de exemplos: **não executa código escrito pelo estudante**. Um editor Python/JavaScript só deve ser incorporado com isolamento, limites de execução e testes de segurança. A revisão do Logic Forge usa intervalos simples e transparentes; não é FSRS nem uma medida científica de retenção.
+
 ## Núcleos de aprendizagem
 
+- **Logic Forge — níveis 0–5:** pensamento computacional, pseudocódigo, Python, JavaScript, estruturas de dados, algoritmos e engenharia de software.
 - **English Forge — CEFR A1–C2:** progressão organizada pelos seis níveis do Quadro Europeu Comum de Referência, com unidades autorais de gramática em contexto, vocabulário, leitura, compreensão auditiva e produção oral. Há seis atividades de listening e seis de speaking, uma por nível.
 - **Listening:** reprodução de textos por síntese de voz do navegador, opção de velocidade reduzida, transcrição inicialmente oculta e questão de compreensão. A voz é sintetizada pelo dispositivo; não é áudio gravado por falantes nativos.
 - **Speaking:** desafios comunicativos com objetivo, modelo e rubrica; gravação local pelo microfone, reprodução e download do áudio quando o navegador suporta MediaRecorder. Reconhecimento automático de fala é opcional e depende do navegador. O áudio não é enviado a servidor e não há avaliação automática de pronúncia.
@@ -30,6 +37,10 @@ Os problemas do banco interno são autorais e não são apresentados como quest�
 ## Atividades de fala: suporte e privacidade
 
 A gravação requer permissão de microfone e navegador compatível, normalmente em HTTPS ou localhost. O reconhecimento de voz pode não existir em todos os navegadores. Se indisponível, o estudante pode digitar a própria transcrição. A gravação é mantida apenas na sessão, podendo ser reproduzida ou baixada pelo estudante; não é armazenada no servidor. A conclusão registrada guarda apenas o status e o número de critérios de autoavaliação, não a gravação.
+
+## Instalação e modo offline
+
+O frontend pode ser instalado como aplicativo em navegadores compatíveis. O service worker guarda a estrutura principal e os módulos essenciais após a primeira visita online; áudio sintetizado, Tutor IA e recursos externos ainda dependem de seus respectivos serviços. Atualizações do site podem levar alguns instantes para substituir o cache. O progresso continua local ao navegador.
 
 ## Executar o frontend
 
@@ -65,11 +76,13 @@ Em outra janela, execute o frontend na porta 5500. Na seção Ferramentas avanç
 - O banco OBMEP inclui 20 questões objetivas e seis discursivas autorais. Não substitui o acervo oficial de provas e soluções ou a correção humana de demonstrações.
 - O progresso é local e não sincroniza entre dispositivos.
 - O mapa curricular original das 22 trilhas continua sendo planejamento, não 22 cursos completos.
-- O Python Core gera e valida onze famílias específicas de exercícios determinísticos. Não existe provedor de IA conectado.
+- O Python Core gera e valida onze famílias específicas de exercícios determinísticos e não possui provedor de IA próprio. O Tutor IA é uma integração opcional separada via Cloudflare Worker, descrita em `AI_SETUP.md`.
 - O diagnóstico é exploratório, não é teste de QI nem avaliação psicométrica.
 - A API local é single-user e não possui autenticação. Não publique o backend diretamente na internet.
 
 ## Testes
+
+A integração contínua em `.github/workflows/quality.yml` executa checagem de sintaxe, auditoria do HTML, testes do Logic Forge e Tutor Worker, testes dos módulos existentes, auditoria do banco e pytest do backend. O teste automatizado não substitui teste visual real, leitor de tela ou revisão editorial humana.
 
 \`\`\`bash
 node tools/run-tests.cjs
@@ -81,6 +94,9 @@ PYTHONPATH=. python -m pytest
 \`\`\`
 
 ## Estrutura
+
+- `logic-forge.js`, `logic-forge.css`: quarto pilar, com curso local de lógica e programação.
+- `manifest.webmanifest`, `service-worker.js`, `icons/`: instalação e cache offline do app shell.
 
 - \`index.html\`, \`styles/\`, \`scripts/\`: frontend e laboratórios.
 - \`scripts/modules/study-center.js\`: núcleo de trilhas e interação.
