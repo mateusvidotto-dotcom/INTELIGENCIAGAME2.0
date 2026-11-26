@@ -926,6 +926,21 @@
       });
     });
   }
+  byId["en1-texto-mobilidade"].writing = {
+    title:"Redação de treino — Mobilidade urbana e direito à cidade",
+    prompt:"Com base no texto-base e em seus conhecimentos, redija um texto dissertativo-argumentativo sobre os desafios para garantir mobilidade urbana inclusiva no Brasil. Apresente uma tese, desenvolva dois argumentos e proponha uma intervenção detalhada, respeitando os direitos humanos. Treino inspirado nas competências de redação do ENEM; não é uma proposta oficial.",
+    rubric:["Apresenta tese clara e responde ao tema proposto.","Desenvolve argumentos com explicação e repertório pertinente.","Organiza as ideias com coesão e progressão.","Usa a norma-padrão de modo adequado.","Apresenta intervenção com agente, ação, meio, finalidade e detalhamento."]
+  };
+  byId["fu1-literatura-voz-narrativa"].writing = {
+    title:"Resposta discursiva — Ironia e perspectiva narrativa",
+    prompt:"Explique como o narrador constrói a crítica à normalização do atraso no texto-base. Analise pelo menos dois recursos expressivos e relacione-os ao efeito de sentido. Responda em um parágrafo argumentativo, com evidências textuais.",
+    rubric:["Apresenta uma interpretação central clara.","Analisa dois recursos expressivos com precisão.","Utiliza evidências específicas do texto.","Explica o efeito produzido no leitor.","Mantém coesão e correção linguística."]
+  };
+  byId["pas3-historia-democracia"].writing = {
+    title:"Resposta discursiva — Construção histórica da cidadania",
+    prompt:"Explique por que a ampliação da cidadania política no Brasil deve ser compreendida como processo histórico de disputas e mobilização social. Use dois marcos ou exemplos históricos e explique sua relevância.",
+    rubric:["Define cidadania política de modo adequado.","Apresenta dois marcos ou exemplos históricos corretos.","Explica a relação entre mobilização e ampliação de direitos.","Evita generalizações e anacronismos.","Organiza a resposta com clareza."]
+  };
   window.MIND_FORGE_BANK = { units, byId, enrich, references: {
     ENEM:{url:enemRef,label:"Matriz de Referência do ENEM"},
     FUVEST:{url:fuvestRef,label:"FUVEST — programa e provas"},
