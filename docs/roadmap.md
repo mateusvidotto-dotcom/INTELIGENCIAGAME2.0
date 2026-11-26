@@ -1,35 +1,27 @@
-# Roteiro de evolução — MIND FORGE OMEGA
+# Roteiro de evolução — Mind Forge Omega
 
-## Núcleo 2.0/2.1 — implementação na branch
+## Entregue nesta versão (base v2.2)
 
-- Preservação da identidade visual, dos laboratórios, da Expedição Omega, da revisão, da evolução e do Python Core.
-- Centro de estudos com English Forge, Vestibular Forge e Olympiad Forge.
-- Progressão do inglês organizada em A1–C2 pelo CEFR, com unidades, descritores e prática ativa.
-- Seis exercícios de listening e seis de speaking, com TTS, compreensão, gravação local e rubricas.
-- Programa resumido da edição PAS/UEM 2026 Etapa 2, checklist por disciplina e simulador demonstrativo da somatória.
-- Banco autoral OBMEP Nível 3: 20 questões objetivas com cinco alternativas e seis problemas discursivos.
-- Persistência local e integração do progresso expandido ao backup das trilhas.
-- Testes estruturais de níveis, atividades, gabaritos, banco olímpico e regra de pontuação PAS.
+- Logic Forge publicado como quarto pilar: 6 níveis, 20 unidades e 40 exercícios autorais.
+- Pistas graduais, resolução guiada, análise de alternativas, projetos e progresso local.
+- Revisão simples e explicitamente identificada como heurística.
+- Navegação e títulos de tela harmonizados, link para pular ao conteúdo, foco visível e respeito a movimento reduzido.
+- Manifesto PWA, ícone SVG e cache do app shell para disponibilidade offline após a primeira visita online.
+- CI com verificações estruturais, testes do Logic Forge, testes existentes e pytest do backend.
+- Worker do Tutor com limite de corpo, timeout, validação e integração opcional com Rate Limiting.
 
-## Próximas melhorias pedagógicas e técnicas
+## Próximas melhorias
 
-- Expandir a carga horária e os ciclos de revisão do inglês, com mais textos autênticos licenciados, áudios humanos por sotaque, transcrição sincronizada e avaliação externa de pronúncia.
-- Aumentar a variedade de tarefas por nível CEFR, incluindo escrita extensa, interação oral em pares, mediação e avaliação integrada das quatro habilidades.
-- Versionar novas edições e etapas do PAS/UEM apenas após publicação dos respectivos programas e manuais oficiais; ampliar os bancos de questões por fonte, ano, área, assunto e resolução.
-- Completar simulados PAS integrais de 40 questões e rubricas de redação alinhadas ao manual da edição selecionada.
-- Crescer o banco olímpico com mais problemas por tópico e dificuldade, provas completas autorizadas e revisão pedagógica independente.
-- Aperfeiçoar correção discursiva com critérios graduados e feedback por etapa, sem confundir autoavaliação com nota oficial.
-- Integrar as trilhas prioritárias à revisão inteligente já existente.
-- Executar testes completos no navegador, leitores de tela, acessibilidade, responsividade e ambientes com suporte parcial a áudio.
-
-## Continuidade e qualidade
-
-- Sincronização de progresso entre dispositivos com backend autenticado e backups.
-- Soluções alternativas revisadas por especialistas e fontes curriculares versionadas.
-- Expansão progressiva das demais 22 trilhas, sem apresentá-las como cursos completos antes do desenvolvimento.
-- Sudoku com gerador e verificador; motor de xadrez com licença compatível; ampliação do Python Core.
-- Considerar IA apenas com execução server-side, proteção de chaves, validação e identificação do conteúdo gerado.
-- Manter o frontend estático como fallback independente.
+1. Testes reais em Chrome, Firefox, Safari e dispositivos móveis, incluindo 320 px, 200% de zoom e leitores de tela.
+2. Revisão manual de todos os conteúdos educacionais por especialistas e associação de fontes específicas a cada unidade.
+3. Integrar Logic Forge ao motor central de revisão sem fundir ou perder os dados locais existentes.
+4. Implementar editor de código só após criar isolamento real em Worker/iframe sandbox, limites de CPU, memória, saída e rede, com testes de segurança.
+5. Adicionar visualizador passo a passo de variáveis e memória, Portugol e modo de blocos.
+6. Ampliar a prática de inglês com áudio humano licenciado, transcrição sincronizada, interação e feedback externo de pronúncia.
+7. Ampliar simulados por edital e etapa, com provas oficiais autorizadas e fontes verificadas.
+8. Adicionar domínios de armazenamento isolados entre projetos, perfis locais e exportação/restauração com prévia e mesclagem.
+9. Desenvolver temas claro, alto contraste, calmo e explorador; validar contraste e regressão visual em cada tema.
+10. Avaliar sincronização opcional somente após autenticação, proteção de dados e revisão jurídica.
 
 ## Política de conteúdo
 
