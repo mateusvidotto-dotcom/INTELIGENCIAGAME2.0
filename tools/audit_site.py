@@ -69,8 +69,9 @@ def main() -> int:
     for name in required_assets:
         if not any((attrs.get("href") or attrs.get("src") or "").endswith(name) for _, attrs in page.tags):
             errors.append("Recurso não referenciado: " + name)
-    if 'serviceWorker.register("./service-worker.js")' not in html:
-        errors.append("Registro do service worker ausente.")
+    site_script = (ROOT / "scripts" / "site.js").read_text(encoding="utf-8")
+    if 'serviceWorker.register("./service-worker.js")' not in site_script:
+        errors.append("Registro do service worker ausente no controlador principal.")
 
     for _, attrs in page.tags:
         for attr in ("src", "href"):
