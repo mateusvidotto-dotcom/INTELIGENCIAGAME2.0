@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mind-forge-shell-v7';
+const CACHE_NAME = 'mind-forge-shell-v8';
 const APP_SHELL = [
   './',
   './index.html',
@@ -8,7 +8,9 @@ const APP_SHELL = [
   './english-forge.js',
   './english-forge.css',
   './logic-forge.js',
-  './logic-forge.css'
+  './logic-forge.css',
+  './platform-enhancements.js',
+  './preferences.css'
 ];
 
 self.addEventListener('install', event => {
