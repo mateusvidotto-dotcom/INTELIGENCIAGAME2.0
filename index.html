@@ -191,7 +191,7 @@ function escapeHTML(value){return String(value===null||value===undefined?"":valu
 function lessonExams(l){return !l||!l.exams?[]:(Array.isArray(l.exams)?l.exams:[l.exams])}
 function lessonHasExam(l,exam){return lessonExams(l).includes(exam)}
 function examOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession).flatMap(l=>lessonExams(l)))).sort()}
-function subjectOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession).map(l=>l.area||l.topic).filter(Boolean))).sort()}
+function subjectOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession&&(examFilter==="Todos"||lessonHasExam(l,examFilter))).map(l=>l.area||l.topic).filter(Boolean))).sort()}
 function activeQuestions(){return sessionQuestions||(find(unit)?.q||[])}
 function currentSourceLesson(){return sessionSourceIds?find(sessionSourceIds[qi]):find(unit)}
 function renderExamTags(l){return lessonExams(l).map(x=>'<span class="exam-tag">'+escapeHTML(x)+'</span>').join("")}
