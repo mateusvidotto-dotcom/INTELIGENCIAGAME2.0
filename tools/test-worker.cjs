@@ -22,7 +22,7 @@ vm.createContext(sandbox);
 vm.runInContext(workerSource, sandbox, { filename: 'worker/src/index.js', timeout: 10000 });
 const app = sandbox.MindForgeTutor;
 const origin = 'https://mateusvidotto-dotcom.github.io';
-const env = { SITE_ORIGIN: origin, OPENAI_API_KEY: 'test-secret', OPENAI_MODEL: 'test-model' };
+const env = { SITE_ORIGIN: origin, OPENAI_API_KEY: 'test-secret', OPENAI_MODEL: 'test-model', TUTOR_RATE_LIMITER: { async limit() { return { success: true }; } } };
 
 async function request(path, options = {}, envOverride = env, requestOrigin = origin) {
   const headers = new Headers(options.headers || {});
@@ -50,6 +50,10 @@ async function request(path, options = {}, envOverride = env, requestOrigin = or
 
   response = await request('/api/tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: 'oi' }) }, { SITE_ORIGIN: origin });
   assert.equal(response.status, 503);
+
+  response = await request('/api/tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: 'sem binding' }) }, { SITE_ORIGIN: origin, OPENAI_API_KEY: 'test-secret', OPENAI_MODEL: 'test-model' });
+  assert.equal(response.status, 503);
+  assert.equal(upstreamCalls, 0, 'Sem limitador, nenhuma chamada paga deve ser encaminhada.');
 
   const tooLong = JSON.stringify({ question: 'x'.repeat(13000) });
   response = await request('/api/tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: tooLong });
@@ -80,7 +84,11 @@ async function request(path, options = {}, envOverride = env, requestOrigin = or
   assert.equal(response.headers.get('Retry-After'), '60');
   assert.equal(upstreamCalls, 1, 'A requisição bloqueada não deve chegar ao provedor.');
 
-  console.log('PASSOU: Tutor Worker — CORS, rotas, JSON, limite de corpo, segredo, timeout configurado e rate limit opcional.');
+  response = await request('/api/tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: 'falha no limite' }) }, { ...env, TUTOR_RATE_LIMITER: { async limit() { throw new Error('indisponível'); } } });
+  assert.equal(response.status, 503);
+  assert.equal(upstreamCalls, 1, 'Falha no limitador também deve bloquear chamadas pagas.');
+
+  console.log('PASSOU: Tutor Worker — CORS, rotas, JSON, limite de corpo, segredo, timeout configurado e limite obrigatório e bloqueio seguro.');
 })().catch(error => {
   console.error(error);
   process.exitCode = 1;

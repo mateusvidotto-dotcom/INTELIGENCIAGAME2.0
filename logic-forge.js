@@ -581,11 +581,17 @@
   function exportProgress() {
     return { app: 'Mind Forge Logic Forge', schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString(), state: JSON.parse(JSON.stringify(state)) };
   }
+  function validateProgress(payload) { return !!(payload && payload.app === 'Mind Forge Logic Forge' && payload.state && safeState(payload.state)); }
   function importProgress(payload) {
-    if (!payload || payload.app !== 'Mind Forge Logic Forge' || !payload.state) return false;
-    const cleaned = safeState(payload.state);
-    if (!cleaned) return false;
-    state = cleaned; save(); activeLesson = null; activeTab = 'lessons'; render(); return true;
+    if (!validateProgress(payload)) return false;
+    const previous = state; state = safeState(payload.state);
+    if (!save()) { state = previous; return false; }
+    activeLesson = null; selectedAnswer = null; hintIndex = 0; feedback = null; activeTab = 'lessons'; render(); return true;
+  }
+  function resetProgress() {
+    const previous = state; state = defaultState();
+    if (!save()) { state = previous; return false; }
+    activeLesson = null; selectedAnswer = null; hintIndex = 0; feedback = null; activeTab = 'lessons'; render(); return true;
   }
   function handleClick(event) {
     const target = event.target.closest('[data-lf-action]');
@@ -643,6 +649,8 @@
     counts: counts,
     exportProgress: exportProgress,
     importProgress: importProgress,
+    validateProgress: validateProgress,
+    resetProgress: resetProgress,
     levels: levels,
     lessons: lessons,
     progressFor: function (id) { const lesson = lessons.find(function (item) { return item.id === id; }); return lesson ? progressFor(lesson) : null; },

@@ -539,16 +539,12 @@
     {time:'5 min',title:'Write and revise',description:'Escreva um pequeno resumo ou opinião. Reescreva uma frase para deixá-la mais clara e precisa.',action:'Use uma palavra nova e um conector estudado hoje.'}
   ];
 
-  const KEY='mindforge.english.mastery.v1';
+  const KEY='mfo:english:v2', OLD_KEY='mindforge.english.mastery.v1';
   const defaultState=()=>({version:1,completed:{},attempts:[],listening:{},speaking:{},writing:{},vocab:{},daily:{}});
-  function read(){
-    try{
-      const value=JSON.parse(global.localStorage.getItem(KEY)||'null');
-      if(!value||typeof value!=='object')return defaultState();
-      return Object.assign(defaultState(),value);
-    }catch(error){return defaultState();}
-  }
-  function save(state){try{global.localStorage.setItem(KEY,JSON.stringify(state));}catch(error){}}
+  function safeTree(x,d,b){d=d||0;b=b||{n:0};b.n++;if(d>16||b.n>20000)return false;if(x===null||['string','boolean'].includes(typeof x))return true;if(typeof x==='number')return Number.isFinite(x);if(Array.isArray(x))return x.length<=10000&&x.every(v=>safeTree(v,d+1,b));if(!x||typeof x!=='object'||(Object.getPrototypeOf(x)!==Object.prototype&&Object.getPrototypeOf(x)!==null))return false;return Object.keys(x).every(k=>!['__proto__','constructor','prototype'].includes(k)&&k.length<=160&&safeTree(x[k],d+1,b));}
+  function sanitize(value){if(!value||typeof value!=='object'||Array.isArray(value)||value.version!==1||!value.completed||typeof value.completed!=='object'||Array.isArray(value.completed)||!Array.isArray(value.attempts)||!value.listening||typeof value.listening!=='object'||Array.isArray(value.listening)||!value.speaking||typeof value.speaking!=='object'||Array.isArray(value.speaking)||!value.writing||typeof value.writing!=='object'||Array.isArray(value.writing)||!value.vocab||typeof value.vocab!=='object'||Array.isArray(value.vocab)||!value.daily||typeof value.daily!=='object'||Array.isArray(value.daily))return null;try{const text=JSON.stringify(value);if(text.length>1500000)return null;const copy=JSON.parse(text);if(!safeTree(copy,0,{n:0})||copy.attempts.length>5000)return null;return Object.assign(defaultState(),copy);}catch(error){return null;}}
+  function read(){try{const current=global.localStorage.getItem(KEY),legacy=current===null?global.localStorage.getItem(OLD_KEY):null,raw=current===null?legacy:current;if(!raw)return defaultState();const clean=sanitize(JSON.parse(raw));if(!clean)return defaultState();if(current===null&&legacy!==null){try{global.localStorage.setItem(KEY,JSON.stringify(clean));}catch(error){}}return clean;}catch(error){return defaultState();}}
+  function save(state){const clean=sanitize(state);if(!clean)return false;try{global.localStorage.setItem(KEY,JSON.stringify(clean));return true;}catch(error){return false;}}
   const esc=value=>String(value==null?'':value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const stateVars={tab:'overview',level:'All',skill:'All',activeLesson:null,questionIndex:0,selected:null,answered:false,flashIndex:0,flashRevealed:false,mediaRecorder:null,mediaStream:null,mediaChunks:[],mediaUrl:null,recognition:null,ttsRate:0.9,ttsVoice:'en-US'};
   function allVocabulary(){return lessons.flatMap(lesson=>lesson.vocab.map((item,index)=>({id:lesson.id+'-'+index,level:lesson.level,unit:lesson.title,word:item[0],meaning:item[1],example:item[2]})));}
@@ -846,8 +842,10 @@
   }
   function doc(){return global.document||null;}
   function exportProgress(){return read();}
-  function importProgress(value){if(!value||value.version!==1)return false;save(Object.assign(defaultState(),value));render();return true;}
-  const api={render,init,exportProgress,importProgress,levels:LEVELS,lessons,counts:()=>({levels:LEVELS.length,units:lessons.length,questions:lessons.reduce((n,x)=>n+x.questions.length,0),listening:listening.length,speaking:speaking.length,writing:writing.length,vocabulary:allVocabulary().length})};
+  function validateProgress(value){return !!sanitize(value);}
+  function importProgress(value){const clean=sanitize(value);if(!clean||!save(clean))return false;global.speechSynthesis?.cancel();stateVars.activeLesson=null;stateVars.activeListening=null;stateVars.activeSpeaking=null;stateVars.activeWriting=null;stateVars.selected=null;stateVars.answered=false;render();return true;}
+  function resetProgress(){if(!save(defaultState()))return false;try{global.localStorage.removeItem(OLD_KEY);}catch(error){}global.speechSynthesis?.cancel();stateVars.activeLesson=null;stateVars.activeListening=null;stateVars.activeSpeaking=null;stateVars.activeWriting=null;stateVars.selected=null;stateVars.answered=false;render();return true;}
+  const api={render,init,exportProgress,importProgress,validateProgress,resetProgress,levels:LEVELS,lessons,counts:()=>({levels:LEVELS.length,units:lessons.length,questions:lessons.reduce((n,x)=>n+x.questions.length,0),listening:listening.length,speaking:speaking.length,writing:writing.length,vocabulary:allVocabulary().length})};
   global.MindForgeEnglish=api;
   init();
 })(window);

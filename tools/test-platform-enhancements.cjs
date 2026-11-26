@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const store=new Map(),localStorage={getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)};
+const root={dataset:{},setAttribute(k,v){const name=k.replace(/^data-/,'').replace(/-([a-z])/g,(_,c)=>c.toUpperCase());this.dataset[name]=v;}},document={documentElement:root,querySelector(){return{setAttribute(){}};}};
+const en={version:1,completed:{},attempts:[],listening:{},speaking:{},writing:{},vocab:{},daily:{}};
+const lg={app:'Mind Forge Logic Forge',schemaVersion:1,state:{schemaVersion:1,attempts:[],questions:{},completed:[],projects:{},preferences:{dailyLimit:12}}};
+const sandbox={localStorage,document,Date,JSON,Object,Array,Set,Number,String,Math,matchMedia:()=>({matches:false,addEventListener(){}}),MindForgeEnglish:{exportProgress:()=>en,validateProgress:v=>!!v&&v.version===1&&Array.isArray(v.attempts)},MindForgeLogic:{exportProgress:()=>lg,validateProgress:v=>!!v&&v.app==='Mind Forge Logic Forge'&&v.schemaVersion===1}};
+sandbox.window=sandbox;vm.createContext(sandbox);vm.runInContext(fs.readFileSync('platform-enhancements.js','utf8'),sandbox);
+const p=sandbox.MindForgePlatform,old={done:{a:true},tries:[{ok:true}],review:[],profile:{exam:'PAS/UEM',year:'2026'}};
+store.set('mindforge.v3',JSON.stringify(old));assert.equal(p.loadMainState().done.a,true);assert.ok(store.has('mfo:main:v4'));assert.ok(store.has('mindforge.v3'));
+assert.equal(p.saveMainState(old),true);assert.equal(p.saveMainState({done:[],tries:[],review:[],profile:{}}),false);
+p.savePreferences({theme:'alto-contraste',reducedMotion:true});assert.equal(root.dataset.mfoTheme,'alto-contraste');assert.equal(root.dataset.mfoMotion,'reduced');
+const b=p.buildBackup(old);assert.equal(b.schemaVersion,2);assert.equal(p.validateBackup(b).ok,true);assert.equal(p.validateBackup({schema:'mindforge-v3',data:old}).legacy,true);
+assert.equal(p.validateBackup({app:'Mind Forge Omega',schemaVersion:2,modules:{main:{done:[],tries:[],review:[],profile:{}},english:null,logic:null}}).ok,false);
+const bad=JSON.parse('{"done":{},"tries":[],"review":[],"profile":{},"payload":{"__proto__":{"polluted":true}}}');assert.equal(p.validateMainState(bad).ok,false);assert.equal({}.polluted,undefined);
+p.resetPreferences();assert.equal(p.getPreferences().theme,'forja');p.clearMainState();assert.equal(store.has('mindforge.v3'),false);
+console.log('PASSOU: migração, namespace, validação, backup integrado, compatibilidade e preferências.');

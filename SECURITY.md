@@ -15,6 +15,6 @@ Não publique detalhes exploráveis em uma issue pública. Use os recursos priva
 ## Operação
 
 - Não publique o backend FastAPI local sem autenticação e isolamento por usuário.
-- Configure rate limiting e limites de custo no Tutor antes de divulgar o endpoint amplamente.
+- O binding `TUTOR_RATE_LIMITER` é obrigatório e já está declarado em `worker/wrangler.toml`. Ele é aproximado por região e chave IP, não constitui teto global de custo; configure também limite financeiro no provedor. Sem o binding, o Worker bloqueia chamadas pagas.
 - Mantenha dependências e Actions atualizadas.
 - Verifique os logs/alertas do provedor sem adicionar telemetria de estudantes.

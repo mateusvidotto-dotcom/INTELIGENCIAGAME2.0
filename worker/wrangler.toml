@@ -8,3 +8,13 @@ OPENAI_MODEL = "gpt-6.2-astra"
 
 [secrets]
 required = ["OPENAI_API_KEY"]
+
+# Rate limiting is approximate per Cloudflare location. Use an unused namespace ID
+# in your Cloudflare account; change it if another Worker already uses this ID.
+[[ratelimits]]
+name = "TUTOR_RATE_LIMITER"
+namespace_id = "202611260853"
+
+  [ratelimits.simple]
+  limit = 20
+  period = 60
