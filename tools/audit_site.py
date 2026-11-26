@@ -88,7 +88,7 @@ def main() -> int:
     except Exception as exc:
         errors.append("Manifest inválido: " + str(exc))
 
-    inline_scripts = re.findall(r'<script[^>]*>([\\s\\S]*?)</script>', html, flags=re.IGNORECASE)
+    inline_scripts = re.findall(r'<script[^>]*>(.*?)</script>', html, flags=re.IGNORECASE | re.DOTALL)
     if any(script.strip() for script in inline_scripts):
         errors.append("Scripts inline não são permitidos.")
     if not any(tag == "script" and (attrs.get("src") or "").endswith("scripts/site.js") for tag, attrs in page.tags):
