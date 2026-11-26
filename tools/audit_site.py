@@ -65,7 +65,7 @@ def main() -> int:
         if required not in ids:
             errors.append("Elemento obrigatório ausente: #" + required)
 
-    required_assets = ("manifest.webmanifest", "logic-forge.css", "logic-forge.js", "preferences.css", "platform-enhancements.js")
+    required_assets = ("manifest.webmanifest", "logic-forge.css", "logic-forge.js", "preferences.css", "platform-enhancements.js", "scripts/site.js")
     for name in required_assets:
         if not any((attrs.get("href") or attrs.get("src") or "").endswith(name) for _, attrs in page.tags):
             errors.append("Recurso não referenciado: " + name)
@@ -88,20 +88,33 @@ def main() -> int:
     except Exception as exc:
         errors.append("Manifest inválido: " + str(exc))
 
-    inline_scripts = re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script>", html, flags=re.IGNORECASE)
-    inline_scripts = [script for script in inline_scripts if script.strip()]
-    if len(inline_scripts) != 1:
-        errors.append("Esperava um script inline principal; encontrei " + str(len(inline_scripts)))
-    else:
-        args.inline_output.parent.mkdir(parents=True, exist_ok=True)
-        args.inline_output.write_text(inline_scripts[0], encoding="utf-8")
+    inline_scripts = re.findall(r'<script[^>]*>([\\s\\S]*?)</script>', html, flags=re.IGNORECASE)
+    if any(script.strip() for script in inline_scripts):
+        errors.append("Scripts inline não são permitidos.")
+    if not any(tag == "script" and (attrs.get("src") or "").endswith("scripts/site.js") for tag, attrs in page.tags):
+        errors.append("Controlador principal scripts/site.js não está referenciado.")
 
+    csp_entries = [attrs.get("content", "") for tag, attrs in page.tags if tag == "meta" and (attrs.get("http-equiv") or "").lower() == "content-security-policy"]
+    if len(csp_entries) != 1:
+        errors.append("Deve existir exatamente uma política CSP em meta.")
+    else:
+        csp = csp_entries[0].lower()
+        script_policy = next((part.strip() for part in csp.split(";") if part.strip().startswith("script-src ")), "")
+        if "default-src 'self'" not in csp or "base-uri 'self'" not in csp or "object-src 'none'" not in csp or "script-src 'self'" not in csp:
+            errors.append("Diretivas fundamentais da CSP ausentes.")
+        if "unsafe-inline" in script_policy or "unsafe-eval" in csp:
+            errors.append("A CSP não pode liberar scripts inline nem eval.")
+        if "https://*.workers.dev" not in csp:
+            errors.append("A CSP precisa permitir o endpoint do Tutor em workers.dev.")
+
+    if 'id="pillar"></div>' in html or 'id="tasks"></div>' in html:
+        errors.append("Pilares e plano inicial devem existir sem depender de JavaScript.")
     if errors:
         print("FALHAS NA AUDITORIA DO SITE:")
         for error in errors:
             print(" - " + error)
         return 1
-    print("PASSOU: HTML, navegação, links externos, metadados, PWA e recursos locais.")
+    print("PASSOU: HTML, navegação, CSP, conteúdo inicial, links externos, PWA e recursos locais.")
     return 0
 
 
