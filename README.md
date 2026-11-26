@@ -2,6 +2,10 @@
 
 Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva os laboratórios originais, a Expedição Omega, a revisão inteligente, os relatórios e o Python Core; amplia as trilhas prioritárias de inglês, vestibulares e matemática olímpica.
 
+## English Forge — curso completo conectado ao site
+
+A página principal carrega o módulo independente `english-forge.js` e os estilos em `english-forge.css`. O curso oferece seis níveis CEFR, 18 unidades, 71 questões com explicação de cada alternativa, 72 cartões de vocabulário com revisão espaçada local, seis tarefas de listening, seis de speaking e seis de writing. Inclui uma rotina diária de 30 minutos e um caderno de erros. Consulte `ENGLISH_FORGE_GUIDE.md` para o método de estudo e as limitações de áudio/fala.
+
 ## Núcleos de aprendizagem
 
 - **English Forge — CEFR A1–C2:** progressão organizada pelos seis níveis do Quadro Europeu Comum de Referência, com unidades autorais de gramática em contexto, vocabulário, leitura, compreensão auditiva e produção oral. Há seis atividades de listening e seis de speaking, uma por nível.
