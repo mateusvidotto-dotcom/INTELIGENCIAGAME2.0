@@ -188,11 +188,13 @@ function openCurrentQuestionInChatGPT(){const question=document.getElementById("
 
 
 function escapeHTML(value){return String(value===null||value===undefined?"":value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
-function examOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession).flatMap(l=>Array.isArray(l.exams)?l.exams:[]))).sort()}
+function lessonExams(l){return !l||!l.exams?[]:(Array.isArray(l.exams)?l.exams:[l.exams])}
+function lessonHasExam(l,exam){return lessonExams(l).includes(exam)}
+function examOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession).flatMap(l=>lessonExams(l)))).sort()}
 function subjectOptionsForPath(){return Array.from(new Set(C[path].filter(l=>!l.isSession).map(l=>l.area||l.topic).filter(Boolean))).sort()}
 function activeQuestions(){return sessionQuestions||(find(unit)?.q||[])}
 function currentSourceLesson(){return sessionSourceIds?find(sessionSourceIds[qi]):find(unit)}
-function renderExamTags(l){return (Array.isArray(l.exams)?l.exams:[]).map(x=>'<span class="exam-tag">'+escapeHTML(x)+'</span>').join("")}
+function renderExamTags(l){return lessonExams(l).map(x=>'<span class="exam-tag">'+escapeHTML(x)+'</span>').join("")}
 function renderDetailedFeedback(q){
  const a=q[4]||{},right=q[2],correct=sel===right,letter=n=>String.fromCharCode(65+n);
  const alternatives=Array.isArray(a.alternatives)?a.alternatives:[];
@@ -217,7 +219,7 @@ function renderWritingPanel(l){
 function save(){localStorage.setItem(KEY,JSON.stringify(d));home()}function show(v){view=v;document.querySelectorAll(".screen").forEach(x=>x.classList.add("hide"));let el=document.getElementById("s-"+v);if(el)el.classList.remove("hide");document.getElementById("crumb").textContent=v.toUpperCase();document.querySelectorAll("[data-nav]").forEach(x=>x.classList.toggle("active",x.dataset.nav===v));if(v==="home")home();if(v==="courses")courses();if(v==="lesson")lesson();if(v==="quiz")quiz();if(v==="review")review();if(v==="stats")stats();if(v==="settings")settings();if(v==="ai")aiPage()}
 function home(){let count=Object.values(d.done).filter(Boolean).length;document.getElementById("done").textContent=count;document.getElementById("attempts").textContent=d.tries.length;document.getElementById("accuracy").textContent=d.tries.length?Math.round(d.tries.filter(x=>x.ok).length/d.tries.length*100)+"%":"—";document.getElementById("review-count").textContent=d.review.length;document.getElementById("pillar").innerHTML=[["english","Aa","ENGLISH FORGE","Inglês progressivo, vocabulário, gramática, leitura e prática."],["vestibular","∑","VESTIBULAR FORGE","Fundamentos por disciplina, questões e interpretação."],["olympiad","Ω","OLYMPIAD FORGE","Estratégias matemáticas, problemas e justificativas."]].map(x=>'<article class="card pillar" data-path="'+x[0]+'"><div class="icon">'+x[1]+'</div><span class="tag">'+x[2]+'</span><h3>'+x[2].replace(" FORGE","")+'</h3><p>'+x[3]+'</p><div class="progress"><i style="width:'+pct(x[0])+'%"></i></div><small class="muted">'+pct(x[0])+'% concluído</small></article>').join("");document.getElementById("tasks").innerHTML=["english","vestibular","olympiad"].map(p=>{let l=C[p].find(x=>!d.done[x.id])||C[p][0];return'<div class="task"><div class="tasktext"><strong>'+l.title+'</strong><small>'+l.goal+'</small></div><button data-open="'+l.id+'">Começar →</button></div>'}).join("")}
 function courses(){
- const list=C[path].filter(l=>!l.isSession&&(examFilter==="Todos"||(Array.isArray(l.exams)&&l.exams.includes(examFilter)))&&(subjectFilter==="Todas"||(l.area||l.topic)===subjectFilter));
+ const list=C[path].filter(l=>!l.isSession&&(examFilter==="Todos"||lessonHasExam(l,examFilter))&&(subjectFilter==="Todas"||(l.area||l.topic)===subjectFilter));
  const exams=examOptionsForPath(),subjects=subjectOptionsForPath();
  const questionCount=list.reduce((n,l)=>n+l.q.length,0);
  const title={english:"English Forge",vestibular:"Vestibular Forge",olympiad:"Olympiad Forge"}[path];
@@ -242,7 +244,7 @@ function courses(){
 }function quiz(){
  const questions=activeQuestions(),q=questions[qi],source=currentSourceLesson()||find(unit);
  if(!q)return;
- const meta=sessionQuestions?sessionLabel:(Array.isArray(source?.exams)?source.exams.join(" · "):(source?.area||source?.topic||"Treino"));
+ const meta=sessionQuestions?sessionLabel:(lessonExams(source).join(" · ")||(source?.area||source?.topic||"Treino"));
  document.getElementById("s-quiz").innerHTML='<article class="card section"><button class="btn" data-nav="courses">← Trilhas</button><div class="tag" style="margin-top:18px">'+escapeHTML(String(meta).toUpperCase())+' · QUESTÃO '+(qi+1)+' / '+questions.length+'</div><div class="progress"><i style="width:'+Math.round((qi+1)/questions.length*100)+'%"></i></div><h2 class="question">'+escapeHTML(q[0])+'</h2>'+q[1].map((o,i)=>'<button class="option '+(sel===i?"selected":"")+(revealed&&i===q[2]?" correct":"")+(revealed&&sel===i&&sel!==q[2]?" wrong":"")+'" data-answer="'+i+'" '+(revealed?"disabled":"")+'>'+String.fromCharCode(65+i)+'. '+escapeHTML(o)+'</button>').join("")+(revealed?renderDetailedFeedback(q):"")+'<div class="buttons">'+(revealed?'<button class="btn primary" id="next">'+(qi===questions.length-1?"Finalizar sessão":"Próxima questão →")+'</button>':'<button class="btn primary" id="check" '+(sel===null?"disabled":"")+'>Verificar resposta</button><button class="btn" id="hint">Pista</button>')+'</div><p class="question-context">Leia a análise antes de avançar. O objetivo é entender o raciocínio, não apenas memorizar a letra.</p></article>';
 }function startQuiz(){sessionQuestions=null;sessionSourceIds=null;sessionLabel="";qi=0;sel=null;revealed=false;answers=[];show("quiz")}
 function startFilteredSimulation(){
@@ -258,7 +260,7 @@ function check(){
  const q=activeQuestions()[qi],source=currentSourceLesson()||find(unit);
  if(!q||sel===null)return;
  revealed=true;answers[qi]=sel;
- const attempt={id:source?.id||unit,questionIndex:qi,question:q[0],exam:sessionQuestions?sessionLabel:(Array.isArray(source?.exams)?source.exams.join(" · "):""),subject:source?.area||source?.topic||"Geral",ok:sel===q[2],selected:sel,correct:q[2],date:new Date().toISOString().slice(0,10)};
+ const attempt={id:source?.id||unit,questionIndex:qi,question:q[0],exam:sessionQuestions?sessionLabel:lessonExams(source).join(" · "),subject:source?.area||source?.topic||"Geral",ok:sel===q[2],selected:sel,correct:q[2],date:new Date().toISOString().slice(0,10)};
  d.tries.push(attempt);
  if(!attempt.ok&&!d.review.includes(attempt.id))d.review.push(attempt.id);
  localStorage.setItem(KEY,JSON.stringify(d));quiz();
