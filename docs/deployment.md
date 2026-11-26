@@ -28,6 +28,10 @@ Consulte `AI_SETUP.md`. A chave OpenAI deve ser configurada como segredo do Clou
 
 CORS aceita somente a origem configurada, mas isso não autentica o cliente. Para uso público, configure o binding Cloudflare Rate Limiting chamado `TUTOR_RATE_LIMITER`, monitore consumo e defina um teto de gastos. A política por IP pode limitar pessoas que compartilham uma rede. O Worker responde com erro de serviço se o binding estiver configurado e indisponível.
 
+## Política de segurança do frontend
+
+O HTML não contém JavaScript inline. O controlador da aplicação é carregado de `scripts/site.js` e a página usa CSP por meta com `script-src 'self'`, sem `eval`. A política permite o Tutor apenas por HTTPS em `*.workers.dev`. Como o GitHub Pages não permite configurar cabeçalhos HTTP, esta CSP não substitui cabeçalhos de resposta e não permite configurar `frame-ancestors`; para uma política completa, use um host que permita cabeçalhos de segurança.
+
 ## Integração contínua
 
 O workflow `.github/workflows/quality.yml` executa checagem de sintaxe JavaScript, auditoria estrutural de HTML e links locais, testes do Logic Forge, testes do núcleo modular, auditoria do banco de questões e testes do backend Python.
