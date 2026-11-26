@@ -21,7 +21,7 @@ O site GitHub Pages é estático. Para usar uma IA de verdade sem publicar uma c
    `npx wrangler secret put OPENAI_API_KEY`
 4. Publique:
    `npx wrangler deploy`
-5. Copie a URL `workers.dev` exibida pelo Wrangler, acrescentando `/api/tutor`.
+5. Copie a URL `workers.dev` exibida pelo Wrangler, acrescentando `/api/tutor`. O frontend aceita apenas HTTPS em `*.workers.dev`, alinhado à CSP do site.
 6. A configuração já está em `worker/wrangler.toml`. Antes de publicar, confira se `namespace_id = "202611260853"` é único na sua conta Cloudflare; se já for usado, troque por outro inteiro positivo. Publique o Worker a partir da pasta `worker`. O limite inicial é 20 chamadas por minuto por IP e por localização Cloudflare. Sem o binding, ou se ele ficar indisponível, o Worker retorna HTTP 503 sem chamar a API paga.
 7. Abra o site, entre em **Tutor IA → Conectar a IA**, cole a URL e salve.
 8. Use **Testar conexão**. O teste consulta `/health`.

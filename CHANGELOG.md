@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.3.0 — CSP, JavaScript externo e navegação acessível
+
+- Extraído o controlador principal para `scripts/site.js`, removendo JavaScript inline do HTML.
+- Adicionada CSP por meta com `script-src 'self'`, bloqueio de `eval` e restrição das conexões do Tutor a `*.workers.dev`.
+- Atualizado o shell offline para armazenar o novo arquivo JavaScript.
+- Padronizados os rótulos da navegação e adotados ícones SVG acessíveis, com texto visível.
+- Tornados os cartões dos quatro pilares botões operáveis por teclado e preenchida a home antes da execução do JavaScript.
+- A precisão global só é exibida após pelo menos dez tentativas; antes disso, a interface informa que ainda há poucos dados.
+- Auditoria de qualidade reforçada para detectar scripts inline, ausência de CSP e regressão do conteúdo inicial.
+
+
 ## 2.2.0 — Logic Forge, acessibilidade estrutural e modo offline
 
 - Adicionado Logic Forge como quarto pilar: 6 níveis, 20 unidades e 40 exercícios autorais, do pensamento computacional a minimax e poda alfa-beta.

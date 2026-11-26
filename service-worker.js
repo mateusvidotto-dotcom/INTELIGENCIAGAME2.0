@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mind-forge-shell-v8';
+const CACHE_NAME = 'mind-forge-shell-v9';
 const APP_SHELL = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const APP_SHELL = [
   './logic-forge.js',
   './logic-forge.css',
   './platform-enhancements.js',
+  './scripts/site.js',
   './preferences.css'
 ];
 

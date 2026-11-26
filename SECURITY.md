@@ -18,3 +18,11 @@ Não publique detalhes exploráveis em uma issue pública. Use os recursos priva
 - O binding `TUTOR_RATE_LIMITER` é obrigatório e já está declarado em `worker/wrangler.toml`. Ele é aproximado por região e chave IP, não constitui teto global de custo; configure também limite financeiro no provedor. Sem o binding, o Worker bloqueia chamadas pagas.
 - Mantenha dependências e Actions atualizadas.
 - Verifique os logs/alertas do provedor sem adicionar telemetria de estudantes.
+
+
+## Política do frontend estático — v2.3
+
+- O controlador principal é carregado de `scripts/site.js`; o HTML não deve conter scripts inline.
+- A página aplica uma CSP por meta com `script-src 'self'`, sem `unsafe-inline` para scripts e sem `unsafe-eval`.
+- O Tutor no frontend aceita apenas endpoints HTTPS do domínio `*.workers.dev`, alinhados à diretiva `connect-src`.
+- GitHub Pages não permite configurar todos os cabeçalhos HTTP. A CSP por meta não substitui cabeçalhos de resposta e não pode definir `frame-ancestors`. Para controle completo, use hospedagem que permita cabeçalhos de segurança.
