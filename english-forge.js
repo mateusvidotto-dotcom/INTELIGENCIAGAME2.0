@@ -770,7 +770,7 @@
     stateVars.flashIndex=0;stateVars.flashRevealed=false;render();
   }
   function handleClick(event){
-    const target=event.target.closest('[data-ef-tab],[data-ef-skill],[data-ef-level],[data-ef-open],[data-ef-answer],[data-ef-listen],[data-ef-speaking],[data-ef-writing],[data-ef-rate],[data-ef-daily],[data-ef-action],#ef-reveal-vocab,#ef-check-answer,#ef-next-question,#ef-save-example,#ef-play,#ef-play-slow,#ef-stop-audio,#ef-show-script,#ef-check-listen,#ef-model-audio,#ef-record,#ef-stop-record,#ef-play-record,#ef-download-record,#ef-recognise,#ef-save-speaking,#ef-save-writing,#ef-writing-ai,#ef-ask-ai,[data-ef-back]');
+    const target=event.target.closest('[data-ef-tab],[data-ef-skill],[data-ef-level],[data-ef-open],[data-ef-answer],[data-ef-listen],[data-ef-speaking],[data-ef-writing],[data-ef-rate],[data-ef-daily],[data-ef-action],#ef-reveal-vocab,#ef-check-answer,#ef-next-question,#ef-save-example,#ef-play,#ef-play-slow,#ef-stop-audio,#ef-show-script,#ef-check-listen,#ef-model-audio,#ef-record,#ef-stop-record,#ef-play-record,#ef-download-record,#ef-recognise,#ef-listen-finish,#ef-save-speaking,#ef-save-writing,#ef-writing-ai,#ef-ask-ai,[data-ef-back]');
     if(!target)return;
     if(target.matches('[data-ef-tab]')){stateVars.tab=target.dataset.efTab;stateVars.activeLesson=null;stateVars.activeListening=null;render();}
     else if(target.matches('[data-ef-skill]')){const skill=target.dataset.efSkill;if(skill==='reading'||skill==='grammar'){stateVars.tab='lessons';stateVars.skill=skill==='reading'?'Reading':'Grammar';}else if(['listening','speaking','writing','vocabulary'].includes(skill)){stateVars.tab=skill;stateVars.skill='All';}render();}
