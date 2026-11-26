@@ -11,7 +11,7 @@ O English Forge é um percurso autoral organizado pelos seis níveis do Common E
 - C1 — inversão, registro formal, modalização, coesão e leitura editorial.
 - C2 — ironia, implicatura, precisão lexical e síntese de perspectivas.
 
-O percurso contém 18 unidades, 71 questões objetivas autorais, 72 cartões de vocabulário, 6 tarefas de listening, 6 de speaking e 6 de writing.
+O percurso contém 18 unidades, 71 questões objetivas autorais, 72 cartões de vocabulário, 6 tarefas de listening, 6 de speaking e 6 de writing. As aulas também incluem apoio opcional em português: tente primeiro compreender a explicação em inglês e abra a ajuda traduzida apenas quando precisar.
 
 ## Um ciclo de aprendizagem de 30 minutos
 
