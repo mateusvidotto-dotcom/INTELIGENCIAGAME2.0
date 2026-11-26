@@ -123,17 +123,16 @@ export default {
       return json({ error: "O segredo OPENAI_API_KEY ainda não foi configurado no Worker." }, 503, cors);
     }
 
-    // Optional Cloudflare Rate Limiting binding. CORS is not authentication.
-    if (env.TUTOR_RATE_LIMITER) {
-      const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-      try {
-        const limit = await env.TUTOR_RATE_LIMITER.limit({ key: ip });
-        if (!limit.success) {
-          return json({ error: "Muitas mensagens em pouco tempo. Aguarde e tente novamente." }, 429, cors, { "Retry-After": "60" });
-        }
-      } catch {
-        return json({ error: "O controle de uso está temporariamente indisponível." }, 503, cors);
-      }
+    // Fail closed: do not forward paid requests without an active rate limiter.
+    if (!env.TUTOR_RATE_LIMITER || typeof env.TUTOR_RATE_LIMITER.limit !== "function") {
+      return json({ error: "O Tutor aguarda a configuração obrigatória do limite de uso." }, 503, cors);
+    }
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+    try {
+      const limit = await env.TUTOR_RATE_LIMITER.limit({ key: ip });
+      if (!limit.success) return json({ error: "Muitas mensagens em pouco tempo. Aguarde e tente novamente." }, 429, cors, { "Retry-After": "60" });
+    } catch {
+      return json({ error: "O controle de uso está temporariamente indisponível." }, 503, cors);
     }
 
     let rawBody;
