@@ -273,7 +273,7 @@ function check(){
  const attempt={id:source?.id||unit,questionIndex:qi,question:q[0],exam:sessionQuestions?sessionLabel:lessonExams(source).join(" · "),subject:source?.area||source?.topic||"Geral",ok:sel===q[2],selected:sel,correct:q[2],date:new Date().toISOString().slice(0,10)};
  d.tries.push(attempt);
  if(!attempt.ok&&!d.review.includes(attempt.id))d.review.push(attempt.id);
- localStorage.setItem(KEY,JSON.stringify(d));quiz();
+ if(!MindForgePlatform.saveMainState(d))alert("Não foi possível salvar seu progresso. Exporte um backup e confira o espaço disponível.");quiz();
 }
 function next(){
  const questions=activeQuestions();
