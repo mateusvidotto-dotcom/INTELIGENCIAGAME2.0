@@ -2,7 +2,7 @@ name: Mind Forge quality checks
 
 on:
   push:
-    branches: [main, mind-forge-omega-v7-foundation]
+    branches: [main, mind-forge-omega-v7-foundation, mind-forge-omega-v9-security-ux]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -31,12 +31,12 @@ jobs:
           node --check english-forge.js
           node --check logic-forge.js
           node --check platform-enhancements.js
+          node --check scripts/site.js
           node --check worker/src/index.js
           find scripts worker -name '*.js' -print0 | xargs -0 -n 1 node --check
       - name: Audit static HTML and local resources
         run: |
-          python tools/audit_site.py --inline-output /tmp/mind-forge-inline.js
-          node --check /tmp/mind-forge-inline.js
+          python tools/audit_site.py
       - name: Test storage migration and unified backup
         run: node tools/test-platform-enhancements.cjs
       - name: Test Logic Forge curriculum and backup
