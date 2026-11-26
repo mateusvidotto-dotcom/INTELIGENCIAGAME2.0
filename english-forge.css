@@ -89,6 +89,7 @@
 .ef-content-panel h3{font-size:14px;margin:20px 0 8px}
 .ef-content-panel p,.ef-content-panel li{color:#c1cedd;font-size:12px;line-height:1.8}
 .ef-content-panel ul{padding-left:19px}
+.ef-pt-support{margin:13px 0;padding:11px 13px;border:1px solid rgba(232,201,139,.23);border-radius:10px;background:rgba(83,64,32,.16)}.ef-pt-support summary{cursor:pointer;color:#efd59c;font-size:11px;font-weight:750}.ef-pt-support p{margin:10px 0 2px;color:#d8d3c8;font-size:11px;line-height:1.75}
 .ef-reading-panel{background:linear-gradient(110deg,rgba(22,51,64,.76),rgba(19,28,47,.94));border-left:3px solid #7cdce6}
 .ef-reading-panel pre,.ef-script{white-space:pre-wrap;font:500 13px/1.85 Inter,system-ui,sans-serif;color:#e1eaf4;margin:0}
 .ef-reading-panel pre{margin-top:12px}
