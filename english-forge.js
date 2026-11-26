@@ -257,9 +257,9 @@
       passage:'A report on urban trees\\nThe samples were collected in three neighbourhoods and were analysed by an independent team. The report suggests that shaded streets may be associated with lower surface temperatures. The authors caution that other factors were not fully controlled.',
       vocab:[['suggest','sugerir / indicar','The results suggest a possible link.'],['caution','alertar / advertir','The authors caution readers.'],['surface','superfície','Surface temperature can vary.'],['controlled','controlado','Not all variables were controlled.']],
       questions:[
-        q('Choose the correct passive form: “Researchers ___ the samples yesterday.”',['were analysed','analysed by','were analysing by','was analysed'],0,'The samples são objeto da ação; a voz passiva usa be + past participle e concorda no plural.',
+        q('Complete the passive sentence: “The samples ___ by the researchers yesterday.”',['were analysed','analysed by','were analysing by','was analysed'],0,'The samples são objeto da ação; a voz passiva usa be + past participle e concorda no plural.',
           ['O sujeito da frase é the samples.','A amostra recebe a ação, não a executa.','Past Simple passive plural: were analysed.'],
-          ['Were analysed é a estrutura correta, mas a frase sem by researchers precisa ser reorganizada; a melhor opção aqui é alternativa A para completar “The samples ___ yesterday” — Note: this question asks to rewrite the phrase with passive subject.'],
+          ['É a forma correta: were + past participle, concordando com samples no plural.','Analysed by não possui o auxiliar necessário para formar uma passiva finita.','Were analysing exigiria uma ação em progresso e não se encaixa no enunciado.','Was não concorda com o sujeito plural samples.'],
           'Misturar o agente da ação com o sujeito gramatical.','Na passiva, o objeto da ativa vira sujeito e recebe be + particípio.'),
         q('Why does the report use “may be associated with” rather than “causes”?',['To express certainty about a proven cause.','To avoid claiming causation when the evidence supports only a possible association.','To say that the study collected no data.','To describe a completed action in the past.'],1,'May be associated with modaliza o grau de certeza e não transforma correlação em causalidade.',
           ['Observe may: ele reduz a certeza.','Associated with indica uma relação observada.','Causes afirmaria causalidade direta, que o texto não estabeleceu.'],
@@ -541,9 +541,9 @@
   }
   function renderOverview(){
     const p=progressSummary();
-    return '<section class="ef-hero"><div class="eyebrow">LANGUAGE MASTERY · CEFR</div><h1>English Forge</h1><p>Build English through grammar, vocabulary, reading, listening, speaking and writing. Study for understanding, then retrieve and use what you learned.</p><div class="ef-hero-metrics"><div><strong>'+p.completed+'/'+p.totalLessons+'</strong><span>units completed</span></div><div><strong>'+p.due+'</strong><span>cards due</span></div><div><strong>'+p.attempts+'</strong><span>practice attempts</span></div><div><strong>'+p.accuracy===null?'—':p.accuracy+'%'+'</strong><span>observed accuracy</span></div></div></section>'+
+    return '<section class="ef-hero"><div class="eyebrow">LANGUAGE MASTERY · CEFR</div><h1>English Forge</h1><p>Build English through grammar, vocabulary, reading, listening, speaking and writing. Study for understanding, then retrieve and use what you learned.</p><div class="ef-hero-metrics"><div><strong>'+p.completed+'/'+p.totalLessons+'</strong><span>units completed</span></div><div><strong>'+p.due+'</strong><span>cards due</span></div><div><strong>'+p.attempts+'</strong><span>practice attempts</span></div><div><strong>'+(p.accuracy===null?'—':p.accuracy+'%')+'</strong><span>observed accuracy</span></div></div></section>'+
       '<section class="ef-section"><div class="ef-heading"><div><h2>Six levels of proficiency</h2><p>Choose a level by the tasks you can perform, not by how many rules you have memorised.</p></div><a href="https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-descriptors" target="_blank" rel="noopener noreferrer">Official CEFR descriptors ↗</a></div><div class="ef-level-grid">'+LEVELS.map(levelCard).join('')+'</div></section>'+
-      '<section class="ef-section"><div class="ef-heading"><div><h2>Train all the skills</h2><p>Do not let English become only grammar exercises.</p></div></div><div class="ef-skill-grid">'+[['Reading','BookOpen','Understand ideas, details, structure and implied meaning.'],['Listening','Headphones','Listen once for gist, again for evidence and detail.'],['Speaking','Mic','Produce language, record yourself and self-assess.'],['Writing','PenLine','Plan, draft, revise and improve accuracy.'],['Grammar','Braces','Notice forms in context and use them in new sentences.'],['Vocabulary','Layers','Learn meaning, pronunciation, collocation and usage.']].map(x=>'<button class="ef-skill-card" data-ef-tab="'+x[0].toLowerCase()+'"><b>'+esc(x[0])+'</b><span>'+esc(x[2])+'</span><i>Open practice →</i></button>').join('')+'</div></section>'+
+      '<section class="ef-section"><div class="ef-heading"><div><h2>Train all the skills</h2><p>Do not let English become only grammar exercises.</p></div></div><div class="ef-skill-grid">'+[['Reading','BookOpen','Understand ideas, details, structure and implied meaning.'],['Listening','Headphones','Listen once for gist, again for evidence and detail.'],['Speaking','Mic','Produce language, record yourself and self-assess.'],['Writing','PenLine','Plan, draft, revise and improve accuracy.'],['Grammar','Braces','Notice forms in context and use them in new sentences.'],['Vocabulary','Layers','Learn meaning, pronunciation, collocation and usage.']].map(x=>'<button class="ef-skill-card" data-ef-skill="'+x[0].toLowerCase()+'"><b>'+esc(x[0])+'</b><span>'+esc(x[2])+'</span><i>Open practice →</i></button>').join('')+'</div></section>'+
       '<section class="ef-section"><div class="ef-heading"><div><h2>Your 30-minute study routine</h2><p>Tick each activity as you complete it. The plan resets each day.</p></div></div>'+renderDailyPlan()+'</section>'+
       '<section class="ef-section"><div class="ef-heading"><div><h2>Learning principles</h2><p>Practice methods that make you retrieve and use language, not just recognise it.</p></div></div><div class="ef-method-grid">'+methods.map(x=>'<article class="ef-method-card"><span>'+x.time+'</span><b>'+esc(x.title)+'</b><p>'+esc(x.description)+'</p><small>'+esc(x.action)+'</small></article>').join('')+'</div></section>';
   }
@@ -584,7 +584,7 @@
   }
   function renderReview(){
     const s=read(),errors=s.attempts.filter(a=>!a.correct).slice(-30).reverse();
-    return errors.length?'<div class="ef-error-list">'+errors.map(a=>'<article class="ef-error-item"><div class="ef-unit-tags"><span>'+a.level+'</span><span>'+esc(a.unitTitle)+'</span></div><p>'+esc(a.prompt)+'</p><small>Your answer: '+esc(a.selectedText)+' · Correct: '+esc(a.correctText)+'</small><button data-ef-open="'+a.unitId+'">Revisit this unit →</button></article>').join('')+'</div>':'<div class="ef-empty"><h3>No errors recorded yet</h3><p>When you miss an answer, it appears here with a link back to its lesson. Keep practising.</p></div>';
+    return errors.length?'<div class="ef-error-list">'+errors.map(a=>'<article class="ef-error-item"><div class="ef-unit-tags"><span>'+a.level+'</span><span>'+esc(a.unitTitle)+'</span></div><p>'+esc(a.prompt)+'</p><small>Your answer: '+esc(a.selectedText)+' · Correct: '+esc(a.correctText)+'</small>'+(a.activity==='listening'?'<button data-ef-listen="'+a.unitId+'">Repeat listening →</button>':'<button data-ef-open="'+a.unitId+'">Revisit this unit →</button>')+'</article>').join('')+'</div>':'<div class="ef-empty"><h3>No errors recorded yet</h3><p>When you miss an answer, it appears here with a link back to its lesson. Keep practising.</p></div>';
   }
   function renderMethod(){
     return '<div class="ef-method-long">'+
@@ -622,7 +622,7 @@
     const i=stateVars.questionIndex,answered=stateVars.answered,selected=stateVars.selected,letter=n=>String.fromCharCode(65+n);
     return '<div class="ef-question"><h3>'+esc(item.prompt)+'</h3><div class="ef-options">'+item.options.map((o,n)=>'<button class="ef-option '+(selected===n?'selected':'')+(answered&&n===item.answer?' correct':'')+(answered&&selected===n&&selected!==item.answer?' wrong':'')+'" data-ef-answer="'+n+'" '+(answered?'disabled':'')+'><b>'+letter(n)+'.</b> '+esc(o)+'</button>').join('')+'</div>'+
       (answered?feedbackMarkup(item,selected,level,unitTitle):'<button class="btn primary" id="ef-check-answer" '+(selected===null?'disabled':'')+'>Check answer</button>')+
-      (answered?'<button class="btn primary" id="ef-next-question">'+(i===lessons.find(x=>x.id===stateVars.activeLesson).questions.length-1?'Finish unit':'Next question →')+'</button>':'')+
+      (answered?(standalone?'<button class="btn primary" id="ef-listen-finish">Back to listening tasks →</button>':'<button class="btn primary" id="ef-next-question">'+(i===lessons.find(x=>x.id===stateVars.activeLesson).questions.length-1?'Finish unit':'Next question →')+'</button>'):'')+
       '</div>';
   }
   function feedbackMarkup(item,selected,level,unitTitle){
@@ -651,7 +651,7 @@
   }
   function openListening(id){
     const item=listening.find(x=>x.id===id);if(!item)return;
-    stateVars.activeListening=id;stateVars.selected=null;stateVars.answered=false;renderListeningTask();
+    stateVars.activeLesson=null;stateVars.activeSpeaking=null;stateVars.activeWriting=null;stateVars.activeListening=id;stateVars.selected=null;stateVars.answered=false;renderListeningTask();
   }
   function renderListeningTask(){
     const item=listening.find(x=>x.id===stateVars.activeListening),root=doc().getElementById('s-english');if(!item||!root)return;
@@ -677,7 +677,7 @@
     if(stateVars.selected===null)return;
     stateVars.answered=true;
     const correct=stateVars.selected===item.answer,s=read();
-    s.attempts.push({unitId:stateVars.activeListening||'listen',unitTitle:title,level,prompt:item.prompt,selectedText:item.options[stateVars.selected],correctText:item.options[item.answer],correct,at:new Date().toISOString()});
+    s.attempts.push({unitId:stateVars.activeListening||'listen',unitTitle:title,level,prompt:item.prompt,selectedText:item.options[stateVars.selected],correctText:item.options[item.answer],correct,activity:kind,at:new Date().toISOString()});
     if(kind==='listening'&&correct)s.listening[stateVars.activeListening]={done:true,at:new Date().toISOString()};
     save(s);renderListeningTask();
   }
@@ -748,6 +748,7 @@
     const s=read();s.writing[item.level]=text;save(s);doc().getElementById('ef-writing-status').textContent='Draft saved locally.';
   }
   function sendWritingToAI(){
+    saveWriting();
     const item=writing.find(x=>x.level===stateVars.activeWriting),text=doc().getElementById('ef-writing-text').value.trim();
     if(!text){doc().getElementById('ef-writing-status').textContent='Write a draft first.';return;}
     const nav=doc().querySelector('[data-nav="ai"]');if(nav)nav.click();
@@ -769,15 +770,16 @@
     stateVars.flashIndex=0;stateVars.flashRevealed=false;render();
   }
   function handleClick(event){
-    const target=event.target.closest('[data-ef-tab],[data-ef-level],[data-ef-open],[data-ef-answer],[data-ef-listen],[data-ef-speaking],[data-ef-writing],[data-ef-rate],[data-ef-daily],[data-ef-action],#ef-reveal-vocab,#ef-check-answer,#ef-next-question,#ef-save-example,#ef-play,#ef-play-slow,#ef-stop-audio,#ef-show-script,#ef-check-listen,#ef-model-audio,#ef-record,#ef-stop-record,#ef-play-record,#ef-download-record,#ef-recognise,#ef-save-speaking,#ef-save-writing,#ef-writing-ai,#ef-ask-ai,[data-ef-back]');
+    const target=event.target.closest('[data-ef-tab],[data-ef-skill],[data-ef-level],[data-ef-open],[data-ef-answer],[data-ef-listen],[data-ef-speaking],[data-ef-writing],[data-ef-rate],[data-ef-daily],[data-ef-action],#ef-reveal-vocab,#ef-check-answer,#ef-next-question,#ef-save-example,#ef-play,#ef-play-slow,#ef-stop-audio,#ef-show-script,#ef-check-listen,#ef-model-audio,#ef-record,#ef-stop-record,#ef-play-record,#ef-download-record,#ef-recognise,#ef-save-speaking,#ef-save-writing,#ef-writing-ai,#ef-ask-ai,[data-ef-back]');
     if(!target)return;
-    if(target.matches('[data-ef-tab]')){stateVars.tab=target.dataset.efTab;stateVars.activeLesson=null;render();}
+    if(target.matches('[data-ef-tab]')){stateVars.tab=target.dataset.efTab;stateVars.activeLesson=null;stateVars.activeListening=null;render();}
+    else if(target.matches('[data-ef-skill]')){const skill=target.dataset.efSkill;if(skill==='reading'||skill==='grammar'){stateVars.tab='lessons';stateVars.skill=skill==='reading'?'Reading':'Grammar';}else if(['listening','speaking','writing','vocabulary'].includes(skill)){stateVars.tab=skill;stateVars.skill='All';}render();}
     else if(target.matches('[data-ef-level]')){stateVars.tab='lessons';stateVars.level=target.dataset.efLevel;stateVars.skill='All';render();}
     else if(target.matches('[data-ef-open]'))openLesson(target.dataset.efOpen);
     else if(target.matches('[data-ef-back]')){stateVars.activeLesson=null;stateVars.activeListening=null;stateVars.activeSpeaking=null;stateVars.activeWriting=null;render();}
     else if(target.matches('[data-ef-answer]')){if(stateVars.answered)return;stateVars.selected=Number(target.dataset.efAnswer);if(stateVars.activeLesson)renderLesson();else if(stateVars.activeListening)renderListeningTask();}
-    else if(target.id==='ef-check-answer'){if(stateVars.activeLesson)checkAnswer();}
-    else if(target.id==='ef-next-question'){if(stateVars.activeLesson)nextQuestion();}
+    else if(target.id==='ef-check-answer'){if(stateVars.activeLesson)checkAnswer();else if(stateVars.activeListening)checkListening();}
+    else if(target.id==='ef-next-question'){if(stateVars.activeLesson)nextQuestion();}else if(target.id==='ef-listen-finish'){stateVars.activeListening=null;stateVars.tab='listening';render();}
     else if(target.id==='ef-reveal-vocab'){stateVars.flashRevealed=true;render();}
     else if(target.matches('[data-ef-rate]'))rateFlashcard(target.dataset.efRate);
     else if(target.matches('[data-ef-listen]'))openListening(target.dataset.efListen);
