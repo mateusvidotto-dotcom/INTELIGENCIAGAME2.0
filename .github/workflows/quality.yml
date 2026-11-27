@@ -41,6 +41,8 @@ jobs:
           python tools/audit_site.py
       - name: Test public question stimuli and Portuguese Forge
         run: node tools/test-site-question-context.cjs
+      - name: Test PWA update consent, Tutor context and music controls
+        run: node tools/test-app-continuity.cjs
       - name: Test storage migration and unified backup
         run: node tools/test-platform-enhancements.cjs
       - name: Test Logic Forge curriculum and backup
