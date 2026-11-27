@@ -268,7 +268,7 @@
         ['É a limitação metodológica correta.','As categorias somam 100%.','Há 42 respostas para ônibus.','Cada estudante indicou apenas uma opção.','Os percentuais podem ser comparados para a variável que foi medida.'],
         'Não responda sobre uma variável ausente apenas porque existe uma variável relacionada.','Confundir associação intuitiva com evidência medida.',
         ['A tabela registra preferência, não tempo.','O comando pergunta sobre rapidez, que depende da duração.','Procure se existe uma medida em minutos; ela não foi coletada.'],'Validade de conclusões quantitativas','avancado')
-      ],null,null,null,{
+      ],null,{
         title:'Tabela e gráfico — pesquisa hipotética com 100 estudantes',
         author:'Dados simulados e autorais, produzidos apenas para aprendizagem',
         body:'Distribuição de respostas sobre o meio de deslocamento mais frequente até uma escola fictícia. Cada participante escolheu uma única categoria.',
