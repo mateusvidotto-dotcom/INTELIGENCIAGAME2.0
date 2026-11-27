@@ -4,7 +4,7 @@
 
 A página inicial publicada é uma aplicação estática e independente. A entrada principal é `index.html`, que carrega:
 
-- `question-bank.js`: banco de questões integrado à experiência principal;
+- `question-bank.js`: banco de questões integrado à experiência principal;\n- `portuguese-forge.js`: expansão autoral de Português, carregada após o banco público e antes do controlador;\n- `scripts/core/question-context.js`: resolução, validação e renderização dos estímulos associados às questões;
 - `english-forge.js` e `english-forge.css`: trilha de inglês A1–C2;
 - `logic-forge.js` e `logic-forge.css`: quarto pilar de lógica e programação;
 - `service-worker.js` e `manifest.webmanifest`: instalação PWA e cache do app shell.
@@ -40,3 +40,12 @@ O Worker restringe a origem por CORS, mas CORS não é autenticação. O binding
 ## Implantação futura
 
 Para sincronização ou backend público, exigir autenticação, autorização, isolamento por usuário, proteção de segredos, limitação de requisições, política de retenção, backups e revisão de segurança. Manter o frontend estático como experiência de fallback.
+
+
+## Contexto e estímulos das questões — v2.4
+
+A ordem efetiva de carregamento da aplicação publicada é: `question-bank.js` → `portuguese-forge.js` → `scripts/core/question-context.js` → módulos independentes → `scripts/site.js`. A extensão de Português insere unidades autorais no mesmo `MIND_FORGE_BANK` usado pelo controlador; não cria uma segunda tela ou aplicação.
+
+`MindForgeQuestionContext` resolve o estímulo da questão (metadado específico, estímulo da unidade ou `passage` legado). Renderiza texto, fórmula, tabela, gráfico e imagem local, escapa conteúdo textual e rejeita imagens externas incompatíveis com a CSP. O controlador chama o componente tanto na aula quanto no exercício.
+
+Em simulados, `sessionSourceIds[qi]` conserva a unidade-fonte da questão ativa. Se o estímulo exigido estiver ausente, a questão é bloqueada e não entra no conjunto do simulado. O caderno de erros reabre o item por `questionId` (ou texto legado) e restaura sua unidade de origem. Campos novos de tentativa são aditivos e não exigem migração do backup.
