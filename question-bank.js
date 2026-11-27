@@ -937,7 +937,8 @@
       legacy[id].forEach((data,index) => {
         const item = lesson.q[index];
         if (!item) return;
-        item[4] = { concept:data[0], steps:data[1], alternatives:data[2], takeaway:data[3], trap:data[4] };
+        const meta = item[4] && typeof item[4] === "object" ? item[4] : {};
+        item[4] = { ...meta, concept:data[0], steps:data[1], alternatives:data[2], takeaway:data[3], trap:data[4] };
       });
     });
   }
