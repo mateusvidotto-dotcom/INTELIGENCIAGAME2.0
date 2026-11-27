@@ -1,4 +1,4 @@
-# MIND FORGE OMEGA ∞ — v2.3 · Quatro pilares de aprendizagem
+# MIND FORGE OMEGA ∞ — v2.4 · Quatro pilares de aprendizagem
 
 Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva o conteúdo e os laboratórios existentes; oferece quatro pilares conectados: inglês, preparação acadêmica, matemática olímpica e lógica/programação. O objetivo é domínio progressivo, não competição.
 
@@ -116,3 +116,12 @@ Consulte \`docs/architecture.md\`, \`docs/pedagogy.md\`, \`docs/deployment.md\` 
 O controlador principal fica em `scripts/site.js`, fora do HTML. A página usa CSP por meta com `script-src 'self'`, sem `eval` e sem scripts inline. O Tutor integrado aceita URLs HTTPS no domínio padrão `*.workers.dev`. A navegação utiliza ícones SVG com texto visível, os cartões dos quatro pilares são botões acessíveis por teclado e a home apresenta conteúdo inicial antes da execução do JavaScript. A auditoria automática foi ampliada para verificar essas garantias.
 
 A CSP por meta é uma proteção parcial: GitHub Pages não permite configurar todos os cabeçalhos HTTP. Consulte `SECURITY.md` e `docs/deployment.md` para os limites conhecidos.
+
+
+## Questões contextualizadas e Português — v2.4
+
+A aplicação pública carrega `portuguese-forge.js` depois de `question-bank.js` e antes de `scripts/site.js`. O componente `scripts/core/question-context.js` associa cada questão à unidade de origem e apresenta o estímulo antes do enunciado. Ele suporta texto-base, fórmula, tabela, gráfico de barras/linha e imagem local. Simulados mistos mantêm a origem de cada item; revisão reabre a questão errada com seu estímulo.
+
+Questões que dependem de texto, gráfico, tabela, dados, experimento ou modelo e não possuem estímulo são bloqueadas. A CI audita o banco público e testa especificamente mobilidade urbana, crescimento populacional e materiais multimodais.
+
+Português recebeu sete unidades autorais adicionais, com 22 questões: inferência/pressupostos, tese/evidência/contra-argumentação, falácias/causalidade, coesão/referenciação, gêneros/ironia, leitura multimodal e produção textual. O material multimodal usa números simulados, identificados como tais.
