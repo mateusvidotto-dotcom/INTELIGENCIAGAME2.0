@@ -1,10 +1,12 @@
-const CACHE_NAME = 'mind-forge-shell-v9';
+const CACHE_NAME = 'mind-forge-shell-v10';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icons/mind-forge.svg',
   './question-bank.js',
+  './portuguese-forge.js',
+  './scripts/core/question-context.js',
   './english-forge.js',
   './english-forge.css',
   './logic-forge.js',
