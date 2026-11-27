@@ -5,7 +5,7 @@
     /de acordo com (?:o|a) texto/i,
     /segundo (?:o|a) autor/i,
     /no texto apresentado/i,
-    /\\b(?:no|do|pelo) texto\\b/i,
+    /\b(?:no|do|pelo) texto\b/i,
     /a ideia central defendida no texto/i,
     /com base no texto/i,
     /a partir do texto/i,
