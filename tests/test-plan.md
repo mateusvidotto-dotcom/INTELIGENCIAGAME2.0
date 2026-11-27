@@ -65,3 +65,14 @@ A auditoria não consegue provar automaticamente que todos os distratores são p
 - [ ] Abrir a unidade multimodal de Português e conferir tabela e gráfico.
 - [ ] Percorrer as sete unidades de Português e as três pistas graduais por questão.
 - [ ] Testar leitura horizontal de tabelas em 320 px e texto longo com zoom de 200%.
+
+
+## Continuidade, Tutor e áudio — v2.5
+- [ ] Com a versão anterior controlando uma sessão ativa, publicar nova versão e confirmar que o service worker fica em espera.
+- [ ] Confirmar que o aviso “Nova versão pronta” aparece sem recarregar ou encerrar a atividade atual.
+- [ ] Dispensar o aviso e seguir estudando; a página não deve recarregar.
+- [ ] Escolher “Atualizar agora” e confirmar que a nova versão assume o controle e recarrega.
+- [ ] Ajustar o volume da música entre 0% e 100%, desligar e reativar; verificar que o volume escolhido persiste no mesmo navegador.
+- [ ] Confirmar que a música só inicia após clique explícito e que o botão mantém texto/ícone/estado acessível.
+- [ ] Pedir aprofundamento ao Tutor numa questão com texto, tabela ou modelo e conferir que o contexto original é incluído no prompt.
+- [ ] Conferir a tela de desempenho por disciplina/habilidade e que grupos com menos de cinco tentativas não exibem percentual.

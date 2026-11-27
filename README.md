@@ -1,4 +1,4 @@
-# MIND FORGE OMEGA ∞ — v2.4 · Quatro pilares de aprendizagem
+# MIND FORGE OMEGA ∞ — v2.5 · Quatro pilares de aprendizagem
 
 Plataforma pessoal de aprendizagem e treinamento intelectual. Preserva o conteúdo e os laboratórios existentes; oferece quatro pilares conectados: inglês, preparação acadêmica, matemática olímpica e lógica/programação. O objetivo é domínio progressivo, não competição.
 
@@ -125,3 +125,14 @@ A aplicação pública carrega `portuguese-forge.js` depois de `question-bank.js
 Questões que dependem de texto, gráfico, tabela, dados, experimento ou modelo e não possuem estímulo são bloqueadas. A CI audita o banco público e testa especificamente mobilidade urbana, crescimento populacional e materiais multimodais.
 
 Português recebeu sete unidades autorais adicionais, com 22 questões: inferência/pressupostos, tese/evidência/contra-argumentação, falácias/causalidade, coesão/referenciação, gêneros/ironia, leitura multimodal e produção textual. O material multimodal usa números simulados, identificados como tais.
+
+
+## Continuidade, Tutor e música — v2.5
+
+A PWA armazena a nova versão sem substituir o service worker que controla uma sessão ativa. Quando a versão nova termina de instalar, o site mostra um aviso discreto; o recarregamento só acontece após o estudante escolher **Atualizar agora**. A atualização pode ser dispensada e a sessão atual continua ativa.
+
+Ao pedir aprofundamento ao Tutor, a interface inclui a área, a unidade, o objetivo, a habilidade, a dificuldade e o estímulo real (texto-base, tabela, gráfico ou modelo) da questão selecionada. O aviso de privacidade permanece: o conteúdo enviado sai do navegador e segue ao serviço de IA configurado.
+
+A música ambiente continua sendo sintetizada localmente pelo navegador e depende de ativação explícita. Agora há controle de volume com persistência local e estado acessível no botão de música.
+
+O painel de desempenho também apresenta tentativas por disciplina e habilidade, além de temas com erros registrados. Os percentuais por grupo só aparecem a partir de cinco tentativas e são descritos como indicadores de atividade, não como diagnóstico de domínio.

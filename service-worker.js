@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mind-forge-shell-v10';
+const CACHE_NAME = 'mind-forge-shell-v11';
 const APP_SHELL = [
   './',
   './index.html',
@@ -17,7 +17,14 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+  // Keep the current study session under the active worker until the user accepts the update.
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
+});
+
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    event.waitUntil(self.skipWaiting());
+  }
 });
 
 self.addEventListener('activate', event => {

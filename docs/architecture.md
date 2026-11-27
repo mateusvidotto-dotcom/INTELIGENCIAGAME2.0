@@ -49,3 +49,14 @@ A ordem efetiva de carregamento da aplicação publicada é: `question-bank.js` 
 `MindForgeQuestionContext` resolve o estímulo da questão (metadado específico, estímulo da unidade ou `passage` legado). Renderiza texto, fórmula, tabela, gráfico e imagem local, escapa conteúdo textual e rejeita imagens externas incompatíveis com a CSP. O controlador chama o componente tanto na aula quanto no exercício.
 
 Em simulados, `sessionSourceIds[qi]` conserva a unidade-fonte da questão ativa. Se o estímulo exigido estiver ausente, a questão é bloqueada e não entra no conjunto do simulado. O caderno de erros reabre o item por `questionId` (ou texto legado) e restaura sua unidade de origem. Campos novos de tentativa são aditivos e não exigem migração do backup.
+
+
+## Atualização da PWA, música e Tutor contextual — v2.5
+
+A versão publicada do service worker não chama mais `skipWaiting()` automaticamente durante a instalação. A nova versão prepara o app shell em segundo plano e fica aguardando; a interface detecta a versão pronta, permite dispensar o aviso ou enviar `SKIP_WAITING` após escolha explícita. Somente depois de `controllerchange` autorizado ocorre o recarregamento. Isso evita substituir o controlador no meio de uma sessão sem consentimento.
+
+O volume ambiente é controlado por um slider e guardado em `mfo:preferences:ambient-volume` no navegador atual. A música continua sendo gerada localmente por Web Audio API e não inicia automaticamente.
+
+O botão de aprofundamento do Tutor encaminha o enunciado, as alternativas, a resposta, o gabarito, a habilidade, o objetivo, a dificuldade e o estímulo resolvido pelo componente de contexto. O envio ainda depende do Worker configurado e do aviso de privacidade da interface.
+
+O painel por disciplina/habilidade usa as tentativas registradas no banco principal. Percentuais por agrupamento são omitidos quando há menos de cinco itens; isso é uma regra de apresentação, não uma estimativa estatística de proficiência.

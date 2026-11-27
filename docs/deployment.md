@@ -37,3 +37,8 @@ O HTML não contém JavaScript inline. O controlador da aplicação é carregado
 O workflow `.github/workflows/quality.yml` executa checagem de sintaxe JavaScript, auditoria estrutural de HTML e links locais, testes do Logic Forge, testes do núcleo modular, auditoria do banco de questões e testes do backend Python.
 
 Esses testes não substituem inspeção visual em navegadores reais, testes com teclado e leitores de tela, avaliação de segurança do Worker ou revisão pedagógica humana.
+
+
+## Atualização da PWA sem interromper estudo
+
+O service worker v11 não se ativa imediatamente após instalar. O site apresenta um aviso não bloqueante quando a versão nova está pronta. O usuário pode escolher atualizar (mensagem `SKIP_WAITING`) ou dispensar o aviso. A recarga ocorre apenas após a ação explícita. Ao testar a atualização, mantenha uma sessão ativa aberta e confirme que ela continua funcionando até a pessoa aceitar.
