@@ -14,8 +14,11 @@ assert.ok(Context, 'Question Context API deve ser carregada.');
 const bankSandbox = { window: {} };
 vm.createContext(bankSandbox);
 vm.runInContext(fs.readFileSync(path.join(root, 'question-bank.js'), 'utf8'), bankSandbox, { timeout: 10000 });
+vm.runInContext(fs.readFileSync(path.join(root, 'portuguese-forge.js'), 'utf8'), bankSandbox, { timeout: 10000 });
 const bank = bankSandbox.window.MIND_FORGE_BANK;
 assert.ok(bank && Array.isArray(bank.units) && bank.units.length > 0, 'Banco público deve ser carregado.');
+assert.equal(bankSandbox.window.MindForgePortuguese.counts().units, 7, 'Portuguese Forge deve adicionar sete unidades avançadas.');
+assert.equal(bankSandbox.window.MindForgePortuguese.counts().questions, 22, 'Portuguese Forge deve adicionar 22 questões contextualizadas.');
 const missing = Context.audit(bank.units);
 assert.deepEqual(JSON.parse(JSON.stringify(missing)), [], 'Nenhuma questão dependente de estímulo pode ficar sem material.');
 
@@ -56,6 +59,12 @@ const unsafe = { passage: 'Texto <img src=x onerror=alert(1)> seguro', authored:
 assert.ok(Context.render(unsafe, null).includes('&lt;img'), 'Texto-base deve escapar HTML.');
 const remoteImage = { stimulus: { sections: [{ type: 'image', src: 'https://example.com/image.png', alt: 'externa' }] }, q: [] };
 assert.ok(!Context.render(remoteImage, null).includes('https://example.com'), 'Imagens externas incompatíveis com CSP devem ser rejeitadas.');
+const portugueseIds = ['pt-inferencia-pressupostos','pt-argumentacao-evidencia','pt-falacias-causalidade','pt-coesao-referencia','pt-generos-ironia','pt-leitura-multimodal','pt-redacao-planejamento'];
+for (const id of portugueseIds) assert.ok(bank.byId[id], 'Unidade portuguesa deve estar no banco: ' + id);
+const multimodal = bank.byId['pt-leitura-multimodal'];
+assert.ok(Context.render(multimodal, multimodal.q[0]).includes('42%'), 'Tabela multimodal precisa aparecer na questão correspondente.');
+assert.ok(multimodal.q.every(q => Context.inspect(multimodal, q).available), 'Todas as questões multimodais devem encontrar seu estímulo.');
+
 const prompts = [
   'Segundo o autor, qual argumento é central?',
   'Com base no gráfico, qual valor é maior?',
@@ -66,4 +75,4 @@ const prompts = [
 ];
 for (const prompt of prompts) assert.equal(Context.requiresStimulus([prompt]), true, 'Dependência precisa ser detectada: ' + prompt);
 
-console.log('PASSOU: ' + bank.units.length + ' unidades do banco público auditadas; mobilidade, modelo populacional, bloqueio de contexto ausente, texto seguro, fórmula, tabela, gráfico e imagem validados.');
+console.log('PASSOU: ' + bank.units.length + ' unidades públicas auditadas, incluindo 7 unidades de Português e 22 novas questões; mobilidade, modelo populacional, bloqueio de contexto ausente, texto seguro, fórmula, tabela, gráfico e imagem validados.');
