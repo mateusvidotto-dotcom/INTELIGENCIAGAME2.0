@@ -61,3 +61,15 @@ As questões desta base são autorais. Os nomes dos exames representam referênc
 ## Correção pedagógica
 
 A interface apresenta a análise imediatamente após cada resposta, seja ela correta ou incorreta. O caderno de erros guarda a pergunta, a alternativa escolhida, o gabarito, o exame e a disciplina para orientar a revisão. Os rascunhos discursivos ficam no armazenamento local do navegador e podem ser enviados ao Tutor IA para feedback adicional.
+
+
+## Estímulos e contexto — aplicação pública
+
+O banco usado pela página tem duas formas compatíveis de estímulo:
+
+- Forma legada: `unit.passage`, preservada sem alteração.
+- Forma estruturada: `unit.stimulus` com `title`, `author`, `body` e `sections`. As seções aceitam `text`, `formula`, `table`, `chart` e `image`.
+
+O renderer fica em `scripts/core/question-context.js`. Para dependências textuais, o enunciado é auditado por expressões indicativas de referência a texto, tabela, gráfico, modelo ou experimento. Uma questão que exigir estímulo e não o possuir é bloqueada na tela e excluída do simulado. O componente é usado tanto na aula como no exercício; assim o texto não depende de uma seção aberta por iniciativa do estudante.
+
+O módulo `portuguese-forge.js` adiciona sete unidades e 22 itens autorais ao `MIND_FORGE_BANK` existente, sem sobrescrever o conteúdo anterior. Cada novo item recebe ID estável, competência/habilidade, objetivo, dificuldade, explicação, etapas, justificativa por alternativa, armadilha e pistas graduais.

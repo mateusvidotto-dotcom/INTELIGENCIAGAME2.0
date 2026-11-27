@@ -52,3 +52,16 @@ node tools/run-tests.cjs
 O fluxo `.github/workflows/quality-check.yml` realiza estes passos automaticamente no GitHub Actions. Os testes cobrem sintaxe JavaScript, integridade do banco, tipos e níveis de questões, unicidade de IDs, distribuição de alternativas depois do embaralhamento, variantes procedurais de atenção/memória, XP, persistência, fila de revisão e diversidade adaptativa.
 
 A auditoria não consegue provar automaticamente que todos os distratores são pedagogicamente excelentes, que toda interpretação bíblica é correta ou que a experiência funciona em todos os dispositivos. A revisão humana e a inspeção em navegadores reais continuam necessárias.
+
+
+## Contexto dos itens e simulados — v2.4
+- [ ] Abrir a unidade Mobilidade urbana e confirmar que o texto-base integral aparece na aula.
+- [ ] Abrir a primeira questão de mobilidade e confirmar que o texto aparece antes do enunciado e das alternativas.
+- [ ] Abrir PAS/UEM Etapa 3 → Funções exponenciais e confirmar que o modelo `N(t)=500·2^(t/3)` aparece na questão que pergunta quando a população alcança 2.000.
+- [ ] Iniciar um simulado misto com unidades de textos diferentes e confirmar que o estímulo muda junto com a questão.
+- [ ] Confirmar que a questão seguinte não mantém o texto da questão anterior.
+- [ ] Errar uma questão contextualizada, abrir o Caderno de erros e usar “Rever esta questão”; confirmar que texto, tabela ou modelo original reaparece.
+- [ ] Conferir que uma questão com referência a texto/gráfico/tabela sem estímulo é bloqueada e não entra no simulado.
+- [ ] Abrir a unidade multimodal de Português e conferir tabela e gráfico.
+- [ ] Percorrer as sete unidades de Português e as três pistas graduais por questão.
+- [ ] Testar leitura horizontal de tabelas em 320 px e texto longo com zoom de 200%.

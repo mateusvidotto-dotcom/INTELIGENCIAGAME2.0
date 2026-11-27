@@ -7,11 +7,26 @@
     stem, options, answer, concept,
     { concept, steps, alternatives, takeaway, trap }
   ];
-  const U = (id, area, title, topic, goal, exams, level, passage, examples, tip, questions, reference, referenceLabel, writing) => ({
-    id, area, title, topic, goal, exams, level, passage, examples, tip, text: topic + ". " + goal, q: questions,
-    reference, referenceLabel, writing,
-    authored: true
-  });
+  const U = (id, area, title, topic, goal, exams, level, passage, examples, tip, questions, reference, referenceLabel, writing, stimulus) => {
+    const difficulty = /desafio/i.test(level) ? "desafio" : /avançado/i.test(level) ? "avancado" : /intermediário/i.test(level) ? "intermediario" : "basico";
+    const enrichedQuestions = (questions || []).map((question, index) => {
+      const meta = question[4] && typeof question[4] === "object" ? question[4] : {};
+      question[4] = {
+        ...meta,
+        id: meta.id || id + "-q" + (index + 1),
+        difficulty: meta.difficulty || difficulty,
+        skill: meta.skill || topic,
+        objective: meta.objective || goal,
+        authorship: "autoral"
+      };
+      return question;
+    });
+    return {
+      id, area, title, topic, goal, exams, level, difficulty, passage, stimulus,
+      examples, tip, text: topic + ". " + goal, q: enrichedQuestions,
+      reference, referenceLabel, writing, authored: true
+    };
+  };
   const enemRef = "https://www.gov.br/inep/pt-br/centrais-de-conteudo/acervo-linha-editorial/publicacoes-institucionais/avaliacoes-e-exames-da-educacao-basica/matrizes-de-referencia-enem";
   const fuvestRef = "https://www.fuvest.br/vestibular-da-usp/";
   const ufprRef = "https://lua.nc.ufpr.br/PortalNC/Concurso?concurso=PS2027";
@@ -922,7 +937,8 @@
       legacy[id].forEach((data,index) => {
         const item = lesson.q[index];
         if (!item) return;
-        item[4] = { concept:data[0], steps:data[1], alternatives:data[2], takeaway:data[3], trap:data[4] };
+        const meta = item[4] && typeof item[4] === "object" ? item[4] : {};
+        item[4] = { ...meta, concept:data[0], steps:data[1], alternatives:data[2], takeaway:data[3], trap:data[4] };
       });
     });
   }

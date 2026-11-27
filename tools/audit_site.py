@@ -65,7 +65,7 @@ def main() -> int:
         if required not in ids:
             errors.append("Elemento obrigatório ausente: #" + required)
 
-    required_assets = ("manifest.webmanifest", "logic-forge.css", "logic-forge.js", "preferences.css", "platform-enhancements.js", "scripts/site.js")
+    required_assets = ("manifest.webmanifest", "logic-forge.css", "logic-forge.js", "preferences.css", "platform-enhancements.js", "scripts/site.js", "portuguese-forge.js", "scripts/core/question-context.js")
     for name in required_assets:
         if not any((attrs.get("href") or attrs.get("src") or "").endswith(name) for _, attrs in page.tags):
             errors.append("Recurso não referenciado: " + name)
