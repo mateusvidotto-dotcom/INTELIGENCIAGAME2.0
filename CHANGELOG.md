@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.0 — Continuidade da PWA, Tutor contextual e áudio
+
+- Alterado o service worker para aguardar confirmação explícita antes de ativar uma nova versão; o estudante pode continuar a sessão atual ou atualizar quando desejar.
+- Adicionado aviso de versão pronta, com ações Atualizar agora e Agora não; cache passa a v11.
+- O Tutor recebe o estímulo da questão (texto, tabela, gráfico, fórmula/modelo), objetivo, habilidade e dificuldade no pedido de aprofundamento.
+- Acrescentado controle de volume da música ambiente, salvo localmente; botão mantém ícone e estado acessível.
+- O desempenho passou a mostrar tentativas por disciplina, habilidade e temas com erros, sem exibir percentuais por grupos com menos de cinco tentativas.
+- Adicionada suíte de teste para consentimento de atualização, Tutor contextual e volume local.
+
+
 ## 2.4.0 — Questões com contexto e Português avançado
 
 - Criado `scripts/core/question-context.js`, com renderização reutilizável de texto-base, fórmula, tabela, gráfico e imagem.
