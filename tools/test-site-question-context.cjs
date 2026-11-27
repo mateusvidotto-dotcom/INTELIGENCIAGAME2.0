@@ -75,4 +75,11 @@ const prompts = [
 ];
 for (const prompt of prompts) assert.equal(Context.requiresStimulus([prompt]), true, 'Dependência precisa ser detectada: ' + prompt);
 
+
+const publicSite = fs.readFileSync(path.join(root, 'scripts/site.js'), 'utf8');
+assert.ok(publicSite.includes('contextSystem.render(source,q)'), 'Tela da questão deve renderizar o estímulo da unidade ativa.');
+assert.ok(publicSite.includes('sessionSourceIds=chosen.map(x=>x.lessonId)'), 'Simulado deve conservar a unidade-fonte de cada questão.');
+assert.ok(publicSite.includes('data-review-attempt'), 'Caderno de erros deve permitir reabrir a questão específica.');
+assert.ok(publicSite.includes('hintIndex>0'), 'Pistas graduais devem ser exibidas apenas após solicitação.');
+
 console.log('PASSOU: ' + bank.units.length + ' unidades públicas auditadas, incluindo 7 unidades de Português e 22 novas questões; mobilidade, modelo populacional, bloqueio de contexto ausente, texto seguro, fórmula, tabela, gráfico e imagem validados.');
