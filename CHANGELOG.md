@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.4.0 — Questões com contexto e Português avançado
+
+- Criado `scripts/core/question-context.js`, com renderização reutilizável de texto-base, fórmula, tabela, gráfico e imagem.
+- Integrada a visualização do estímulo na tela da unidade e antes do enunciado da questão.
+- Simulados preservam a unidade-fonte de cada item; o contexto é atualizado a cada questão.
+- Questões que citam material ausente são bloqueadas e excluídas de simulados.
+- Adicionado `portuguese-forge.js` com sete unidades autorais e 22 questões de interpretação, inferência, pressupostos, tese, evidência, contra-argumentação, falácias, coesão, gêneros, ironia, dados multimodais e redação.
+- Questões novas recebem ID, objetivo, habilidade e nível de dificuldade; o histórico registra o identificador e o uso de pistas sem mudar o formato de backup.
+- Implementadas três pistas progressivas, uso registrado na tentativa e reabertura da questão errada com o estímulo original.
+- Atualizado o cache offline para v10 e adicionados testes de integridade do contexto à CI.
+
+
 ## 2.3.0 — CSP, JavaScript externo e navegação acessível
 
 - Extraído o controlador principal para `scripts/site.js`, removendo JavaScript inline do HTML.
