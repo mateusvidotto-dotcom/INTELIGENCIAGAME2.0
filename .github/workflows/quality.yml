@@ -28,6 +28,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check question-bank.js
+          node --check portuguese-forge.js
+          node --check scripts/core/question-context.js
           node --check english-forge.js
           node --check logic-forge.js
           node --check platform-enhancements.js
@@ -37,6 +39,8 @@ jobs:
       - name: Audit static HTML and local resources
         run: |
           python tools/audit_site.py
+      - name: Test public question stimuli and Portuguese Forge
+        run: node tools/test-site-question-context.cjs
       - name: Test storage migration and unified backup
         run: node tools/test-platform-enhancements.cjs
       - name: Test Logic Forge curriculum and backup
