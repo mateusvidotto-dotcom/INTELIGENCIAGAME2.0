@@ -19,6 +19,18 @@ const bank = bankSandbox.window.MIND_FORGE_BANK;
 assert.ok(bank && Array.isArray(bank.units) && bank.units.length > 0, 'Banco público deve ser carregado.');
 assert.equal(bankSandbox.window.MindForgePortuguese.counts().units, 7, 'Portuguese Forge deve adicionar sete unidades avançadas.');
 assert.equal(bankSandbox.window.MindForgePortuguese.counts().questions, 22, 'Portuguese Forge deve adicionar 22 questões contextualizadas.');
+const questionIds = new Set();
+for (const lesson of bank.units) {
+  for (const [index, question] of lesson.q.entries()) {
+    const meta = question[4];
+    assert.ok(meta && typeof meta === 'object', lesson.id + '/' + index + ': metadata deve existir.');
+    assert.ok(typeof meta.id === 'string' && meta.id.length > 0, lesson.id + '/' + index + ': ID estável ausente.');
+    assert.ok(!questionIds.has(meta.id), 'ID de questão duplicado: ' + meta.id);
+    questionIds.add(meta.id);
+    assert.ok(['basico','intermediario','avancado','desafio'].includes(meta.difficulty), lesson.id + '/' + index + ': dificuldade normalizada ausente.');
+    assert.ok(meta.skill && meta.objective && meta.authorship, lesson.id + '/' + index + ': metadados pedagógicos incompletos.');
+  }
+}
 const missing = Context.audit(bank.units);
 assert.deepEqual(JSON.parse(JSON.stringify(missing)), [], 'Nenhuma questão dependente de estímulo pode ficar sem material.');
 
